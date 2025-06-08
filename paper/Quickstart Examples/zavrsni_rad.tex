@@ -1,0 +1,293 @@
+\documentclass[zavrsnirad]{../fer}
+% Dodaj opciju upload za generiranje konačne verzije koja se učitava na FERWeb
+% Add the option upload to generate the final version which is uploaded to FERWeb
+
+
+\usepackage{blindtext}
+\usepackage{subcaption}
+
+
+%--- PODACI O RADU / THESIS INFORMATION ----------------------------------------
+
+% Naslov na engleskom jeziku / Title in English
+\title{Galjerkin finite element method}
+
+% Naslov na hrvatskom jeziku / Title in Croatian
+\naslov{Galjorkinova metoda konačnih elemenata}
+
+% Broj rada / Thesis number
+\brojrada{1884}
+
+% Autor / Author
+\author{Hrvoje Radoš}
+
+% Mentor 
+\mentor{Tomislav Burić}
+
+% Datum rada na engleskom jeziku / Date in English
+\date{June, 2025}
+
+% Datum rada na hrvatskom jeziku / Date in Croatian
+\datum{lipanj, 2025.}
+
+%-------------------------------------------------------------------------------
+
+
+\begin{document}
+
+
+% Naslovnica se automatski generira / Titlepage is automatically generated
+\maketitle
+
+
+%--- ZADATAK / THESIS ASSIGNMENT -----------------------------------------------
+
+% Zadatak se ubacuje iz vanjske datoteke / Thesis assignment is included from external file
+% Upiši ime PDF datoteke preuzete s FERWeb-a / Enter the filename of the PDF downloaded from FERWeb
+\zadatak{Files/zadatak.pdf}
+
+
+%--- ZAHVALE / ACKNOWLEDGMENT --------------------------------------------------
+
+\begin{zahvale}
+	% Ovdje upišite zahvale / Write in the acknowledgment
+	Hvala na kavi...
+\end{zahvale}
+
+
+% Odovud započinje numeriranje stranica / Page numbering starts from here
+\mainmatter
+
+
+% Sadržaj se automatski generira / Table of contents is automatically generated
+\tableofcontents
+
+
+%--- UVOD / INTRODUCTION -------------------------------------------------------
+\chapter{Uvod}
+\label{pog:uvod}
+Diferencijalne jednadžbe su jedan od temeljnih matematičkih
+alata koji se koriste za matematičko modeliranje. Njihova
+važnost se obično prvo primjeti u fizici gdje se one vrlo
+intuitivno pojavljuju u područjima kao što su klasična mehanika,
+elektromagnetizam, termodinamika pa i malo manje intuitivno u
+područjima kao što su kvantna mehanika. Diferencijalne jednažbe
+imaju velik utjecaj i na područja izvan fizike.
+S njima se mogu modelirati izmjene populacija, širenje zaraza,
+oblikovanje raznih genetskih obilježja (uzoraka),
+širenje signala u neuronima, procesiranju slika, raznim
+modeliranjima tržišta itd.
+\bigskip
+\\
+Diferencijalne jednažbe uglavnom nije teško tumačiti. Najveći
+izazov kod rada s njima je svakako traženje rješenja.
+Rješenje ne mora uvijek postojati, ne mora biti jedinstveno,
+a ako postoji i jedinstveno je ne mora biti moguće zapisati
+ga analitički. Tim problemima se između ostaloga bavi numerička
+matematika. Ovaj rad se bavi linearnim parcijalnim diferencijalnim
+jednadžbama s konstantnim koeficijentima i rubnim uvjetom odnosno
+traženjem njihova rješenja koristeći Galjorkinovu metodu
+konačnih elemenata. Cilj rada je napraviti
+C++ biblioteku koja služi kao efikasan, ali iznad svega
+jednostavan alat za rješavanje PDJ-ova.
+% Neki od radova koje ćemo citirati su \cite{6248073,6247753,ghiglia_pritt_phase_unwrapping,hartley2003multiple,4250461,123DCatch}.
+% Trebaju nam samo radi testiranja kako izgleda referenciranje rada s konferencije, rada iz časopisa, knjige i Internetske stranice.
+%
+% \begin{figure}[htb]
+% 	\centering
+% 	\includegraphics[width=0.38\linewidth]{Figures/lenovo_yoga_tab3_pro_front.png}
+% 	\caption{Moja prva slika}
+% 	\label{slk:prvaslika}
+% \end{figure}
+%
+% Referenciramo se na sliku \ref{slk:prvaslika} u sredini rečenice, zatim prije zareza \ref{slk:prvaslika}, te zatim na kraju rečenice \ref{slk:prvaslika}.
+% Upravo smo testirali radi li naredba \verb|\ref| ispravno u slučaju kada nakon nje slijedi točka.
+%
+% Sada slijedi jedna jednadžba:
+% \begin{equation}
+% 	\label{jed:prvajednadzba}
+% 	\int_{-\infty}^{+\infty}f(t)\,dt=F(\omega)
+% \end{equation}
+% Jednadžba \eqref{jed:prvajednadzba} je moja prva jednadžba koja defnira par $f(t)\ufrek F(\omega)$ ili $F(\omega)\uvrem f(t)$.
+
+
+%-------------------------------------------------------------------------------
+\chapter{Glavni dio}
+\label{pog:glavni_dio}
+Galjorkinova metoda konačnih elemenata je složen proces
+koji se sastoji od više dijelova. Na početku ovog 
+poglavlja nudim kratki opis kako ovaj proces izgleda, a
+u narednim poglavljima ulazim u detalje.
+\bigskip
+\\ 
+Jednadžba koju riješavam na domeni $D \subset \mathbb{R}^2$ je:
+
+\begin{equation}
+	\label{PDJ}
+  A \frac{\partial^2 u}{\partial x^2}
+	+ B \frac{\partial^2 u}{\partial x \partial y}
+	+ C \frac{\partial^2 u}{\partial y^2}
+	+ D \frac{\partial u}{\partial x}
+	+ E \frac{\partial u}{\partial y}
+	+ F u = G
+  \quad u \in C^2(D)
+\end{equation}
+
+Ključna ideja ove metode je particioniranje domene na
+što sitnije odnosno finije dijelove koje nazivamo elementima.
+Takvu particiju nazivamo mesh. S meshom potom definiramo
+bazne funckije koje čine bazu s kojom ćemo interpolirati
+rješenje koje tražimo. Dodatnim raspisivanjem ćemo dobiti
+linearni sustav čijim rješavanjem dobivamo naše traženo
+rješenje.
+\bigskip
+\\ 
+Postoji par napomena koje valja primijetiti. Ako obratimo
+pažnju na jednadžbu \eqref{PDJ}, možemo primijetiti da smo
+se ograničinili na rješenja iz prostora $C^2(D)$ dodatnom analizom
+možemo zaključiti i da funkcija $f$ mora biti neprekinuta.
+Ovo se na prvu iz perspektive primjene ne čini kao velika 
+restrikcija jer nekako očekujemo da će fizikalne veličine u 
+stvarnom životu uvijek biti neprekinute, ali ne samo da to nije
+uvijek slučaj to jako često nije slučaj. Kao primjer navodim 
+primjer djelovanja sile (npr. ovješen uteg) na nit. Za modeliranje
+ovakvog sustava je potrebno opisati djelovanje te sile duž
+cijelu nit, ali takav opis bi zahtijevao uporabu Diracove delta 
+funkcije koja nikako nije neprekinuta, štoviše ona nije
+ni funkcija nego distribucija.
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[width=0.38\linewidth]{Figures/nit.png}
+	\caption{Djelovanje točkaste sile na nit}
+	\label{nit}
+\end{figure}
+
+\section{Mesh}
+\label{mesh}
+Mesh je particija domene na sitne dijelove s kojima ju
+možemo aproksimirati. U ovoj implementaciji ti dijelovi 
+će biti trokuti (jer radimo s 2D domenom), pa ću proces
+stvaranja mesha često zvati i triangulacija. S obzirom da
+je jednostavnost korištenja ključno svojstvo ove implementacije 
+odlučio sam se za sljedeći način unosa mesha u računalo.
+\bigskip
+\\ 
+\textbf{Korisnik definira funkciju koja prima koordinate, a
+vraća vrijednost "true" ako je točka unutar domene ili
+"false" ako je točka izvan domene}
+\bigskip
+\\ 
+Ovakav pristup omogućava da se domena definira na sličan 
+način kako bi to radili na papiru iz čega proizlazi jednostavnost.
+Druge C++ biblioteke za unos mesha uglavnom koriste .msh datoteke.
+Ovakav pristup je dobar za komplicirane domene koje se ne mogu
+lako definirati s implicitnim funkcijama, ali je presložen za neke
+jednostavnije primjene. Valja napomenuti da neke biblioteke 
+daju mogućnost da se domena definira preko ključnih riječi kao 
+što su "circle" ili "rectangle". U usporedbi s tim rješenjima 
+moj pristup daje veću fleksibilnost.
+\bigskip
+\\ 
+Jednostavan način korištenja povlači i težinu implementacije.
+Naime, kvalitetan mesh može značajno smanjiti numeričku grešku
+rješenja. Naravno greška se uvijek može smanjiti tako da 
+učinimo mesh finijim, ali to ne možemo raditi u nedogled.
+Ova implementacija mesh generira na poprilično jednostavan način.
+Za ulaz ona traži pravokutnik koji omeđuje domenu nad kojom
+rješavamo PDJ. Taj pravokutnik se potom triangulira i za mesh
+se uzimaju samo elementi čija su sva tri vrha unutar domene.
+Ovakav pristup daje nekvalitetan mesh na rubu. Istraživajući
+bolje pristupe generiranju mesha otkrio sam razne knjige koje
+se bave ovom problematikom, stoga smatram da je za sada
+bitno napraviti implementaciju koja se može naknadno lako 
+nadograditi. Iako jednostavan pristup ovom problemu funkcionira
+mislim da je bitno naglasiti gdje ova implementacija ima
+mjesta za napredak.
+
+\begin{figure}[htbp]
+  \centering
+  \begin{subfigure}[b]{0.45\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{Figures/2Dmesh.png}
+    \caption{Primjer 2D mesha pravokutnika}
+    \label{rectMesh}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.45\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{Figures/apple.png}
+    \caption{Složeni 3D mesh jabuke}
+    \label{jabuka}
+  \end{subfigure}
+  \caption{Primjeri mesheva}
+  \label{meshevi}
+\end{figure}
+
+\subsection{Bazne funkcije}
+
+
+\section{Slaba formulacija problema}
+\label{slabaFormulacija}
+
+\section{Postojanje rješenja}
+\label{postojanje}
+
+\section{Implementacijski detalji}
+\label{implementacijaOpis}
+
+
+%-------------------------------------------------------------------------------
+\chapter{Rezultati i rasprava}
+\label{pog:rezultati_i_rasprava}
+
+
+
+%--- ZAKLJUČAK / CONCLUSION ----------------------------------------------------
+\chapter{Zaključak}
+\label{pog:zakljucak}
+
+
+
+%--- LITERATURA / REFERENCES ---------------------------------------------------
+
+% Literatura se automatski generira iz zadane .bib datoteke / References are automatically generated from the supplied .bib file
+% Upiši ime BibTeX datoteke bez .bib nastavka / Enter the name of the BibTeX file without .bib extension
+\bibliography{literatura}
+
+
+
+%--- SAŽETAK / ABSTRACT --------------------------------------------------------
+
+% Sažetak na hrvatskom
+\begin{sazetak}
+	Unesite sažetak na hrvatskom.
+
+\end{sazetak}
+
+\begin{kljucnerijeci}
+	prva ključna riječ; druga ključna riječ; treća ključna riječ
+\end{kljucnerijeci}
+
+
+% Abstract in English
+\begin{abstract}
+	Enter the abstract in English.
+
+\end{abstract}
+
+\begin{keywords}
+	the first keyword; the second keyword; the third keyword
+\end{keywords}
+
+
+%--- PRIVITCI / APPENDIX -------------------------------------------------------
+
+% Sva poglavlja koja slijede će biti označena slovom i riječi privitak / All following chapters will be denoted with an appendix and a letter
+\backmatter
+
+\chapter{The Code}
+
+
+
+\end{document}
