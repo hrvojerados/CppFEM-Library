@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.6.7)  8 JUN 2025 11:53
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.6.7)  8 JUN 2025 17:41
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -514,12 +514,13 @@ Package caption Info: New subtype `subfigure' on input line 238.
 Package caption Info: New subtype `subtable' on input line 238.
 \c@subtable=\count319
 )
+\c@teorem=\count320
 LaTeX Font Info:    Trying to load font information for T1+stix2 on input line 36.
  (/usr/share/texlive/texmf-dist/tex/latex/stix2-type1/t1stix2.fd
 File: t1stix2.fd 2018/04/02 v2.0.0-latex stix2 T1 font definitions
 ) (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count320
+\l__color_backend_stack_int=\count321
 \l__pdf_internal_box=\box55
 ) (./zavrsni_rad.aux)
 \openout1 = `zavrsni_rad.aux'.
@@ -554,8 +555,8 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 36.
 LaTeX Font Info:    ... okay on input line 36.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 36.
 LaTeX Font Info:    ... okay on input line 36.
-\c@mv@tabular=\count321
-\c@mv@boldtabular=\count322
+\c@mv@tabular=\count322
+\c@mv@boldtabular=\count323
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -593,16 +594,16 @@ LaTeX Font Info:    ... okay on input line 36.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count323
+\scratchcounter=\count324
 \scratchdimen=\dimen180
 \scratchbox=\box56
-\nofMPsegments=\count324
-\nofMParguments=\count325
+\nofMPsegments=\count325
+\nofMParguments=\count326
 \everyMPshowfont=\toks31
-\MPscratchCnt=\count326
+\MPscratchCnt=\count327
 \MPscratchDim=\dimen181
-\MPnumerator=\count327
-\makeMPintoPDFobject=\count328
+\MPnumerator=\count328
+\makeMPintoPDFobject=\count329
 \everyMPtoPDFconversion=\toks32
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -681,7 +682,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/opensans/a_jg4h6q.enc}]
-<Files/zadatak.pdf, id=61, 598.235pt x 845.1575pt>
+<Files/zadatak.pdf, id=73, 598.235pt x 845.1575pt>
 File: Files/zadatak.pdf Graphic file (type pdf)
 <use Files/zadatak.pdf>
 Package pdftex.def Info: Files/zadatak.pdf  used on input line 47.
@@ -690,7 +691,7 @@ File: Files/zadatak.pdf Graphic file (type pdf)
 <use Files/zadatak.pdf>
 Package pdftex.def Info: Files/zadatak.pdf  used on input line 47.
 (pdftex.def)             Requested size: 598.23354pt x 845.15544pt.
-<Files/zadatak.pdf, id=64, page=1, 598.235pt x 845.1575pt>
+<Files/zadatak.pdf, id=76, page=1, 598.235pt x 845.1575pt>
 File: Files/zadatak.pdf Graphic file (type pdf)
 <use Files/zadatak.pdf, page 1>
 Package pdftex.def Info: Files/zadatak.pdf , page1 used on input line 47.
@@ -746,59 +747,78 @@ l.115 \chapter
 
 ]
 Poglavlje 2..
-<Figures/nit.png, id=112, 1027.84pt x 1027.84pt>
+<Figures/nit.png, id=127, 1027.84pt x 1027.84pt>
 File: Figures/nit.png Graphic file (type png)
 <use Figures/nit.png>
-Package pdftex.def Info: Figures/nit.png  used on input line 161.
+Package pdftex.def Info: Figures/nit.png  used on input line 162.
 (pdftex.def)             Requested size: 167.58888pt x 167.57878pt.
 LaTeX Font Info:    Font shape `T1/opensans-TLF/bx/n' in size <16> not available
-(Font)              Font shape `T1/opensans-TLF/b/n' tried instead on input line 166.
+(Font)              Font shape `T1/opensans-TLF/b/n' tried instead on input line 167.
 LaTeX Font Info:    Font shape `T1/opensans-TLF/b/n' will be
-(Font)              scaled to size 16.0pt on input line 166.
+(Font)              scaled to size 16.0pt on input line 167.
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.3}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.207 
+l.208 
        [3
 
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathit.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathbb.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathrm.enc}] [4 <./Figures/nit.png (PNG copy)>]
-<Figures/2Dmesh.png, id=126, 1027.84pt x 1027.84pt>
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathrm.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathit.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathbb.enc}] [4 <./Figures/nit.png (PNG copy)>]
+<Figures/2Dmesh.png, id=141, 1027.84pt x 1027.84pt>
 File: Figures/2Dmesh.png Graphic file (type png)
 <use Figures/2Dmesh.png>
-Package pdftex.def Info: Figures/2Dmesh.png  used on input line 212.
+Package pdftex.def Info: Figures/2Dmesh.png  used on input line 213.
 (pdftex.def)             Requested size: 198.45662pt x 198.44402pt.
-<Figures/apple.png, id=127, 1855.93375pt x 1927.2pt>
+<Figures/apple.png, id=142, 1855.93375pt x 1927.2pt>
 File: Figures/apple.png Graphic file (type png)
 <use Figures/apple.png>
-Package pdftex.def Info: Figures/apple.png  used on input line 219.
+Package pdftex.def Info: Figures/apple.png  used on input line 220.
 (pdftex.def)             Requested size: 198.45662pt x 206.0525pt.
- [5 <./Figures/2Dmesh.png (PNG copy)> <./Figures/apple.png>]
+<Figures/baznaFja.png, id=145, 247.67531pt x 144.54pt>
+File: Figures/baznaFja.png Graphic file (type png)
+<use Figures/baznaFja.png>
+Package pdftex.def Info: Figures/baznaFja.png  used on input line 236.
+(pdftex.def)             Requested size: 220.50887pt x 128.6865pt.
+
+Overfull \hbox (41.1534pt too wide) in paragraph at lines 230--250
+\T1/stix2/m/n/12 tane oblika pra-vo-kut-nog tro-kuta s vr-ho-vima u $\LS1/stix2/m/n/12 .0\LS1/stix2/m/it/12 ; \LS1/stix2/m/n/12 0/$\T1/stix2/m/n/12 ,$\LS1/stix2/m/n/12 .1\LS1/stix2/m/it/12 ; \LS1/stix2/m/n/12 0/$\T1/stix2/m/n/12 ,$\LS1/stix2/m/n/12 .0\LS1/stix2/m/it/12 ; \LS1/stix2/m/n/12 1/$\T1/stix2/m/n/12 . Neka su $\LS1/stix2/m/n/12 .\LS1/stix2/m/it/12 X[]; Y[]\LS1/stix2/m/n/12 /$\T1/stix2/m/n/12 ,$\LS1/stix2/m/n/12 .\LS1/stix2/m/it/12 X[]; Y[]\LS1/stix2/m/n/12 /$\T1/stix2/m/n/12 ,$\LS1/stix2/m/n/12 .\LS1/stix2/m/it/12 X[]; Y[]\LS1/stix2/m/n/12 /$
+ []
+
+[5 <./Figures/2Dmesh.png (PNG copy)> <./Figures/apple.png> <./Figures/baznaFja.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 258--261
+
+ []
+
+[6{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathsf.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathrm-bold.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathcal.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathscr.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathex.enc}] [7]
+LaTeX Font Info:    Trying to load font information for TS1+stix2 on input line 387.
+ (/usr/share/texlive/texmf-dist/tex/latex/stix2-type1/ts1stix2.fd
+File: ts1stix2.fd 2018/04/02 v2.0.0-latex stix2 TS1 font definitions
+) [8{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-ts1.enc}] [9]
 Poglavlje 3..
-[6
+[10
 
 ]
 Poglavlje 4..
-(./zavrsni_rad.bbl [7
+(./zavrsni_rad.bbl [11
 
 ]
 
 LaTeX Warning: Empty `thebibliography' environment on input line 25.
 
-) [8
+) [12
 
-] [9
+] [13
 
-] [10
+] [14
 
 ]
 pdfTeX warning (ext4): destination with the same identifier (name{chapter.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.289 \chapter{The Code}
+l.464 \chapter{The Code}
                         
 Privitak A.
-[11
+[15
 
 
 ] (./zavrsni_rad.aux)
@@ -916,25 +936,27 @@ Files/zadatak.pdf
 Figures/nit.png
 Figures/2Dmesh.png
 Figures/apple.png
+Figures/baznaFja.png
+ts1stix2.fd    2018/04/02 v2.0.0-latex stix2 TS1 font definitions
 zavrsni_rad.bbl
  ***********
 
 Package rerunfilecheck Info: File `zavrsni_rad.out' has not changed.
-(rerunfilecheck)             Checksum: 30FAB697B41D46B5CC4B9F50A92C9666;1479.
+(rerunfilecheck)             Checksum: C3C25678D75C08C7C6B5793DC277AA22;2019.
  ) 
 Here is how much of TeX's memory you used:
- 18038 strings out of 474222
- 280106 string characters out of 5748734
+ 18156 strings out of 474222
+ 282300 string characters out of 5748734
  1934975 words of memory out of 5000000
- 39966 multiletter control sequences out of 15000+600000
- 652129 words of font info for 139 fonts, out of 8000000 for 9000
+ 40055 multiletter control sequences out of 15000+600000
+ 681995 words of font info for 157 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  87i,17n,131p,505b,745s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texlive/texmf-dist/fonts/type1/ascender/opensans/OpenSans-Bold.pfb></usr/share/texlive/texmf-dist/fonts/type1/ascender/opensans/OpenSans-Regular.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/stix2-type1/STIX2Math.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/stix2-type1/STIX2Text-Bold.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/stix2-type1/STIX2Text-Italic.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/stix2-type1/STIX2Text-Regular.pfb>
-Output written on zavrsni_rad.pdf (14 pages, 3290198 bytes).
+</usr/share/texlive/texmf-dist/fonts/type1/ascender/opensans/OpenSans-Bold.pfb></usr/share/texlive/texmf-dist/fonts/type1/ascender/opensans/OpenSans-Regular.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/stix2-type1/STIX2Math.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/stix2-type1/STIX2Text-Bold.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/stix2-type1/STIX2Text-BoldItalic.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/stix2-type1/STIX2Text-Italic.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/stix2-type1/STIX2Text-Regular.pfb>
+Output written on zavrsni_rad.pdf (18 pages, 3465994 bytes).
 PDF statistics:
- 205 PDF objects out of 1000 (max. 8388607)
- 161 compressed objects within 2 object streams
- 28 named destinations out of 1000 (max. 500000)
- 140 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 292 PDF objects out of 1000 (max. 8388607)
+ 234 compressed objects within 3 object streams
+ 45 named destinations out of 1000 (max. 500000)
+ 169 words of extra memory for PDF output out of 10000 (max. 10000000)
 

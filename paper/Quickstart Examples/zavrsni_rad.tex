@@ -5,7 +5,7 @@
 
 \usepackage{blindtext}
 \usepackage{subcaption}
-
+\newtheorem{teorem}{Teorem}
 
 %--- PODACI O RADU / THESIS INFORMATION ----------------------------------------
 
@@ -22,7 +22,7 @@
 \author{Hrvoje Radoš}
 
 % Mentor 
-\mentor{Tomislav Burić}
+\mentor{prof. dr. sc. Tomislav Burić}
 
 % Datum rada na engleskom jeziku / Date in English
 \date{June, 2025}
@@ -120,7 +120,7 @@ poglavlja nudim kratki opis kako ovaj proces izgleda, a
 u narednim poglavljima ulazim u detalje.
 \bigskip
 \\ 
-Jednadžba koju riješavam na domeni $D \subset \mathbb{R}^2$ je:
+Jednadžba koju riješavam na domeni $\Omega \subset \mathbb{R}^2$ je:
 
 \begin{equation}
 	\label{PDJ}
@@ -129,8 +129,8 @@ Jednadžba koju riješavam na domeni $D \subset \mathbb{R}^2$ je:
 	+ C \frac{\partial^2 u}{\partial y^2}
 	+ D \frac{\partial u}{\partial x}
 	+ E \frac{\partial u}{\partial y}
-	+ F u = G
-  \quad u \in C^2(D)
+	+ F u = f(x,y)
+  \quad u \in C^2(\Omega)
 \end{equation}
 
 Ključna ideja ove metode je particioniranje domene na
@@ -142,6 +142,7 @@ linearni sustav čijim rješavanjem dobivamo naše traženo
 rješenje.
 \bigskip
 \\ 
+\label{uvjetNaf}
 Postoji par napomena koje valja primijetiti. Ako obratimo
 pažnju na jednadžbu \eqref{PDJ}, možemo primijetiti da smo
 se ograničinili na rješenja iz prostora $C^2(D)$ dodatnom analizom
@@ -226,17 +227,191 @@ mjesta za napredak.
 
 \subsection{Bazne funkcije}
 
+Nakon uspješno generiranog mesha je potrebno definirati
+bazne funkcije. Bazne fukcije ćemo definirati tako da
+na svakom elementu definiramo polinom prvog stupnja koji
+iznosi $1$ iznad jednog vrha, a $0$ iznad ostalih \ref{baznaFja}
+\begin{figure}[htb]
+	\centering
+	\includegraphics[width=0.5\linewidth]{Figures/baznaFja.png}
+	\caption{bazna fukcija za neki čvor $j$}
+	\label{baznaFja}
+\end{figure}
+Ovo ćemo napraviti za svaki čvor. 
+\bigskip
+\\ 
+Kada budemo radili račun kao što su numerička integracija i 
+slično nad elementima bit će od velike koristi transformirati
+koordinate tako da element koji trenutno računamo postane 
+oblika pravokutnog trokuta s vrhovima u $(0,0)$,$(1,0)$,$(0,1)$.
+Neka su $(X_0, Y_0)$,$(X_1, Y_1)$,$(X_2, Y_2)$ vrhovi elementa
+kojeg želimo preslikati. Supsitucija $(x, y) \rightarrow (\hat x, \hat y)$
+je dana s:
+\begin{align}
+  x = (X_1 - X_0)\hat x + (X_2 - X_0)\hat y + X_0 \\ 
+  y = (Y_1 - Y_0)\hat x +(Y_2 - Y_0) \hat y + Y_0
+\end{align}
+
 
 \section{Slaba formulacija problema}
 \label{slabaFormulacija}
+Radi daljne analize potrebno je navesti jedan bitan 
+teorem.
+\\ 
+\begin{teorem}[Pravilo za divergenciju produkta]
+\label{tm1}
+Neka je $\Omega \subset \mathbb{R}^n$ omeđen otvoreni
+skup s komadno glatkom granicom $\Gamma = \partial \Omega$,
+te neka su $u : \Omega \to \mathbb{R}$ i $\mathbf{V} : \Omega \to \mathbb{R}^n$ 
+dovoljne regularnosti odnosno $\partial \Omega$ je
+Lipschitz neprekinuta, a $u,v \in H^1(\Omega)$
+. Tada vrijedi:
+\[
+\int_{\Gamma} u \mathbf{V} \cdot \hat{\mathbf{n}} \, d\Gamma = 
+\int_{\Omega} u \, \nabla \cdot \mathbf{V} \, d\Omega + 
+\int_{\Omega} \nabla u \cdot \mathbf{V} \, d\Omega.
+\]
+\end{teorem}
+\textbf{Napomena:} $H^1(\Omega)$ označava Soboljev prostor.
+\bigskip
+\\ 
+Vratimo se sada na \ref{PDJ}.
+Cilj nam je dobiti njezinu takozvanu slabu formulaciju.
+Prvo ćemo reformularti PDJ. Primijetimo da vrijedi:
+$$\nabla \cdot (A \nabla u) = 
+  A \frac{\partial^2 u}{\partial x^2}
+	+ B \frac{\partial^2 u}{\partial x \partial y}
+	+ C \frac{\partial^2 u}{\partial y^2}
+$$
+Gdje:
+$$A = 
+\begin{pmatrix}
+  A & B \\ 
+  0 & C
+\end{pmatrix}
+ $$
+ Također vrijedi:
+ $$ \nabla u \cdot a =
+ D \frac{\partial u}{\partial x}
+	+ E \frac{\partial u}{\partial y} $$
+
+Gdje:
+$$a = 
+\begin{pmatrix}
+  D\\ 
+  E
+\end{pmatrix}
+$$
+Time dobivamo sljedeću jednadžbu:
+\begin{equation}
+  \label{vektorVerzija}
+\nabla \cdot (A \nabla u)  + \nabla u \cdot a + Fu = f(x,y)
+\end{equation}
+Do slabe formulacije dolazimo tako da obje strane \ref{vektorVerzija} 
+pomnožimo
+s baznom funkcijom $\varphi_i$, integriramo po $\Omega$
+i onda primijenimo  \ref{tm1} 
+imamo:
+\begin{equation}
+  \int_{\Omega}\nabla \cdot (A \nabla u) \varphi_i \, d\Omega  + 
+  \int_{\Omega} \nabla u \cdot a\varphi_i \, d\Omega  + F\int_{\Omega}u\varphi_i\,d\Omega  =
+  \int_{\Omega}f(x,y)\varphi_i \, d\Omega 
+\end{equation}
+Primjenom teorema \ref{tm1} 
+dobije se:
+\begin{equation}
+  \label{kobasica}
+  \int_{\partial \Omega}(A \nabla u) \varphi_i \, d\Gamma  - 
+  \int_{\Omega}(A \nabla u) \cdot \nabla \varphi_i \, d\Omega  + 
+  \int_{\Omega} \nabla u \cdot a\varphi_i \, d\Omega  + F\int_{\Omega}u\varphi_i\,d\Omega  =
+  \int_{\Omega}f(x,y)\varphi_i \, d\Omega 
+\end{equation}
+S obzirom da su funkcije $\varphi_i$ po definiciji
+na rubu jednake $0$, jednadžba 
+\ref{kobasica} se 
+svede na:
+\begin{equation}
+  \label{slabaFor}
+  -\int_{\Omega}(A \nabla u) \cdot \nabla \varphi_i \, d\Omega  + 
+  \int_{\Omega} \nabla u \cdot a\varphi_i \, d\Omega  + F\int_{\Omega}u\varphi_i\,d\Omega  =
+  \int_{\Omega}f(x,y)\varphi_i \, d\Omega 
+\end{equation}
+Primijetimo kako u ovakvom obliku funkcija $f(x,y)$ 
+na sebi ima puno lakše uvjete (Sjetimo se \ref{uvjetNaf})
+\bigskip
+\\
+Sada interpolacijom:
+$$u = \sum_{j=0}^N \alpha_j \varphi_j$$
+dobivamo sustav:
+\begin{equation}
+\label{linSustav}
+A x = b
+\end{equation}
+Gdje:
+$$(A)_{i,j} = \int_{\Omega} (A\nabla \varphi_j) \cdot \nabla \varphi_i \, d\Omega + 
+\int_{\Omega} (\nabla \varphi_j \cdot a) \varphi_i \, d\Omega +
+F \int_{\Omega} \varphi_j \varphi_i \, d\Omega$$
+$$b_i = \int_{\Omega} f(x,y) \varphi_i \, d \Omega$$
+
+Naime ovaj postupak vrijedi samo s Dirichletovim
+rubnim uvjetima. Neka su čvorovi mesha na rubu indeksirani
+od $N+1$ do $N_b$.
+Kada bi se rješenje na rubu ponašalo kao
+$R(x,y)$ gdje $R(x,y) = \sum_{j=N + 1}^{N_b} g_j \varphi_j$,
+onda bi morali napraviti sljedeću
+supsituciju:
+$$u = \overset{\circ}u + R$$
+Sustav \ref{linSustav}
+postaje:
+$$Ax = b - r$$
+gdje je:
+$$r_i = - \int_{\Omega}(A\nabla R) \nabla \varphi_i \, d \Omega +
+\int_{\Omega}(\nabla R \cdot a) \varphi_i \, d \Omega +
+F \int_{\Omega} R \varphi_i\, d\Omega
+$$
+Time smo problem rješavanja PDJ sveli na problem
+rješavanja linearnog sustava.
+%napiši opet isto, ali za rubni uvjet
+%eventualno možeš pričati o proširenjima za vrijeme
 
 \section{Postojanje rješenja}
 \label{postojanje}
+%Lax Milgram
+Iako se možda na prvi pogled čini da smo gotovi, potrebno 
+je vidjeti da rješenje uopće postoji, stoga uvodim 
+Lax-Milgramov teorem.
+\begin{teorem}
+  \label{laxMil}
+Neka je $ V $ Hilbertov prostor i neka je $ a: V \times V \rightarrow \mathbb{R} $ bilinearna forma koja zadovoljava:
+\begin{itemize}
+    \item \textbf{Kontinuitet:} postoji konstanta $ C > 0 $ takva da
+    $$
+    |a(u, v)| \leq C \|u\|_V \|v\|_V \quad \text{za sve } u, v \in V.
+    $$
+    
+    \item \textbf{Koercivnost (eliptičnost):} postoji konstanta $ \alpha > 0 $ takva da
+    $$
+    a(v, v) \geq \alpha \|v\|_V^2 \quad \text{za sve } v \in V.
+    $$
+\end{itemize}
+
+Tada za svaki linearni funkcional $ f \in V' $ postoji jedinstveno $ u \in V $ takvo da:
+$$
+a(u, v) = f(v) \quad \text{za sve } v \in V.
+$$
+\end{teorem}
+Lako se vidi da se naš sustav \ref{linSustav} 
+može svesti na problem s linearnim funkcionalima iz
+\ref{laxMil}. Iz toga se lako zaključuje da
+postojanje rješenja možemo garantirati samo za ispravan mesh
+(to garantira implementacija) i za eliptičke PDJ što se lako provjeri programski.
 
 \section{Implementacijski detalji}
 \label{implementacijaOpis}
 
-
+\subsection{CSR oblik matrice}
+\subsection{Rješavanje sustava}
+\subsection{Reprezentacija mesha u računalu}
 %-------------------------------------------------------------------------------
 \chapter{Rezultati i rasprava}
 \label{pog:rezultati_i_rasprava}
