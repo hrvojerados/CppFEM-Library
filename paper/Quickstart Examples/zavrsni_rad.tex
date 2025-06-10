@@ -68,10 +68,10 @@
 \label{pog:uvod}
 Diferencijalne jednadžbe su jedan od temeljnih matematičkih
 alata koji se koriste za matematičko modeliranje. Njihova
-važnost se obično prvo primjeti u fizici gdje se one vrlo
+važnost se obično prvo primijeti u fizici gdje se one vrlo
 intuitivno pojavljuju u područjima kao što su klasična mehanika,
 elektromagnetizam, termodinamika pa i malo manje intuitivno u
-područjima kao što su kvantna mehanika. Diferencijalne jednažbe
+područjima kao što su kvantna mehanika. Diferencijalne jednadžbe
 imaju velik utjecaj i na područja izvan fizike.
 S njima se mogu modelirati izmjene populacija, širenje zaraza,
 oblikovanje raznih genetskih obilježja (uzoraka),
@@ -79,7 +79,7 @@ oblikovanje raznih genetskih obilježja (uzoraka),
 modeliranjima tržišta itd.
 \bigskip
 \\
-Diferencijalne jednažbe uglavnom nije teško tumačiti. Najveći
+Diferencijalne jednadžbe uglavnom nije teško tumačiti. Najveći
 izazov kod rada s njima je svakako traženje rješenja.
 Rješenje ne mora uvijek postojati, ne mora biti jedinstveno,
 a ako postoji i jedinstveno je ne mora biti moguće zapisati
@@ -91,24 +91,6 @@ konačnih elemenata. Cilj rada je napraviti
 C++ biblioteku koja služi kao efikasan, ali iznad svega
 jednostavan alat za rješavanje PDJ-ova.
 % Neki od radova koje ćemo citirati su \cite{6248073,6247753,ghiglia_pritt_phase_unwrapping,hartley2003multiple,4250461,123DCatch}.
-% Trebaju nam samo radi testiranja kako izgleda referenciranje rada s konferencije, rada iz časopisa, knjige i Internetske stranice.
-%
-% \begin{figure}[htb]
-% 	\centering
-% 	\includegraphics[width=0.38\linewidth]{Figures/lenovo_yoga_tab3_pro_front.png}
-% 	\caption{Moja prva slika}
-% 	\label{slk:prvaslika}
-% \end{figure}
-%
-% Referenciramo se na sliku \ref{slk:prvaslika} u sredini rečenice, zatim prije zareza \ref{slk:prvaslika}, te zatim na kraju rečenice \ref{slk:prvaslika}.
-% Upravo smo testirali radi li naredba \verb|\ref| ispravno u slučaju kada nakon nje slijedi točka.
-%
-% Sada slijedi jedna jednadžba:
-% \begin{equation}
-% 	\label{jed:prvajednadzba}
-% 	\int_{-\infty}^{+\infty}f(t)\,dt=F(\omega)
-% \end{equation}
-% Jednadžba \eqref{jed:prvajednadzba} je moja prva jednadžba koja defnira par $f(t)\ufrek F(\omega)$ ili $F(\omega)\uvrem f(t)$.
 
 
 %-------------------------------------------------------------------------------
@@ -120,7 +102,7 @@ poglavlja nudim kratki opis kako ovaj proces izgleda, a
 u narednim poglavljima ulazim u detalje.
 \bigskip
 \\ 
-Jednadžba koju riješavam na domeni $\Omega \subset \mathbb{R}^2$ je:
+Jednadžba koju rješavam na domeni $\Omega \subset \mathbb{R}^2$ je:
 
 \begin{equation}
 	\label{PDJ}
@@ -136,7 +118,7 @@ Jednadžba koju riješavam na domeni $\Omega \subset \mathbb{R}^2$ je:
 Ključna ideja ove metode je particioniranje domene na
 što sitnije odnosno finije dijelove koje nazivamo elementima.
 Takvu particiju nazivamo mesh. S meshom potom definiramo
-bazne funckije koje čine bazu s kojom ćemo interpolirati
+bazne funkcije koje čine bazu s kojom ćemo interpolirati
 rješenje koje tražimo. Dodatnim raspisivanjem ćemo dobiti
 linearni sustav čijim rješavanjem dobivamo naše traženo
 rješenje.
@@ -145,7 +127,7 @@ rješenje.
 \label{uvjetNaf}
 Postoji par napomena koje valja primijetiti. Ako obratimo
 pažnju na jednadžbu \eqref{PDJ}, možemo primijetiti da smo
-se ograničinili na rješenja iz prostora $C^2(D)$ dodatnom analizom
+se ograničili na rješenja iz prostora $C^2(D)$ dodatnom analizom
 možemo zaključiti i da funkcija $f$ mora biti neprekinuta.
 Ovo se na prvu iz perspektive primjene ne čini kao velika 
 restrikcija jer nekako očekujemo da će fizikalne veličine u 
@@ -169,7 +151,7 @@ ni funkcija nego distribucija.
 Mesh je particija domene na sitne dijelove s kojima ju
 možemo aproksimirati. U ovoj implementaciji ti dijelovi 
 će biti trokuti (jer radimo s 2D domenom), pa ću proces
-stvaranja mesha često zvati i triangulacija. S obzirom da
+stvaranja mesha često zvati i triangulacija. s obzirom na to da
 je jednostavnost korištenja ključno svojstvo ove implementacije 
 odlučio sam se za sljedeći način unosa mesha u računalo.
 \bigskip
@@ -348,9 +330,12 @@ dobivamo sustav:
 A x = b
 \end{equation}
 Gdje:
-$$(A)_{i,j} = \int_{\Omega} (A\nabla \varphi_j) \cdot \nabla \varphi_i \, d\Omega + 
+\begin{equation}
+\label{elMat}
+(A)_{i,j} = \int_{\Omega} (A\nabla \varphi_j) \cdot \nabla \varphi_i \, d\Omega + 
 \int_{\Omega} (\nabla \varphi_j \cdot a) \varphi_i \, d\Omega +
-F \int_{\Omega} \varphi_j \varphi_i \, d\Omega$$
+F \int_{\Omega} \varphi_j \varphi_i \, d\Omega
+\end{equation}
 $$b_i = \int_{\Omega} f(x,y) \varphi_i \, d \Omega$$
 
 Naime ovaj postupak vrijedi samo s Dirichletovim
@@ -408,10 +393,116 @@ postojanje rješenja možemo garantirati samo za ispravan mesh
 
 \section{Implementacijski detalji}
 \label{implementacijaOpis}
+Sada kada je jasna matematička pozadina 
+Galjorkinove metode konačnih elemenata potrebno je 
+obratiti pažnu na implementaciju i implementacijske detalje.
+S obzirom da je implementacija izvedena u C++-u postoji
+dosta različitih optimizacija koje se mogu implementirati,
+stoga ih navodim u ovom poglavlju.
 
-\subsection{CSR oblik matrice}
+\subsection{CSR reprezentacija matrice}
+Matrica $A$ u \ref{linSustav} 
+često sazdrži puno nul elemenata. To se vrlo lako može 
+vidjeti iz načina na koji se ona računa. Naime, $(A)_{i,j}$ 
+neće biti jednak $0$ samo kada su odgovarajući čvorovi 
+mesha ($i$ i $j$) susjedni. S obzirom da je poželjno da
+matrice sustava budu što veće uvodi se CSR (eng. compact sparse row)
+reprezentacija matrice. Ovaj pojam se može lako objasniti na matrici $M$.
+$$M = \begin{pmatrix}
+  a & 0 & f & 0 & g\\ 
+  0 & b & k & m & 0\\ 
+  h & l & c & 0 & r\\ 
+  0 & n & 0 & d & p\\ 
+  i & 0 & s & q & e
+\end{pmatrix}$$
+Na slici \ref{CSR} 
+se vidi matrica zapisana preko CSR. Vidimo da se
+ova struktura podataka sastoji od 3 vektora. 
+Vektori $A$ i $C$ su jednake veličine kao broj nenul 
+elemenata, a svaki element $R$ odgovara jednom retku.
+Matrica $A$ se stvara tako da čitajući redak po redak
+s lijeva na desno umećemo elemente matrice $M$ koji 
+nisu jednaki $0$. Vrijednost $C_i$ odgovara brojčanoj
+vrijednosti stupca u kojem se element $A_i$ nalazi 
+a element $R_i$ govori od kojeg indeksa kreće $i-ti$
+redak matrice $M$ u vektoru $C$ odnosno $A$. 
+\\ 
+\bigskip
+Dohvat elementa $i,j$ ovakve matrice se vrlo lako implementira.
+\begin{verbatim}
+inline ld get(ull i, ull j) {
+  ull it = R[i];
+  while (C[it] < j) it++;
+  if (C[it] == j) {
+    return A[it];
+  }
+  return 0;
+}
+\end{verbatim}
+Pažljivi čitatelj će primijeti da se pri traženju odgovarajućeg
+stupca (While petlja) radi linearno pretraživanje. Ovaj dio 
+se može ubrzati binarnim pretraživanjem, ali s obzirom na 
+izuzetno malen broj nenul elementa u jednom stupcu (maksimalno $8$)
+u trenutnoj implementaciji mesha, upitno je koliko veliko ubrzanje 
+bi se ostvarilo takvom implementacijom.
+\\ 
+\bigskip
+Slično se implementira i mijenjanje nekog nenul elementa.
+\begin{verbatim}
+inline void inc(ull i, ull j, ld val) {
+  ull it = R[i];
+  while (C[it] < j) it++;
+  if (C[it] == j) {
+    A[it] += val;
+  }
+}
+\end{verbatim}
+\begin{figure}[htb]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Figures/CSR.png}
+	\caption{grafički prikaz CSR reprezentacije matrice $A$}
+	\label{CSR}
+\end{figure}
+
+
 \subsection{Rješavanje sustava}
+
+Računski najsloženji dio je svakako rješavanje linearnog 
+sustava. Na raspolaganju je puno različitih algoritama različitih 
+složenosti, pa tako su neki prilagođeniji nekoj specifičnoj PDJ.
+Naprimjer Choleskyjeva faktorizacija bi mogla biti korištena kada
+bih mogao garantirati da će matrica $A$ biti simetrična pozitivno 
+definitna, ali to se iz \ref{elMat} 
+lako vidi da nije slučaj.
+\bigskip
+\\ 
+Daljnom analizom se može zaključiti da direktne metode nisu dobar
+izbor jer uz vremenski skupo plaćanje faktorizacija matrice (QR, LU \dots),
+takve matrice mogu dovesti do pojavljivanja dodatnih nenul elemenata 
+koji bi povećali zahtjeve za memorijom računala.
+\bigskip
+\\ 
+Preostaju nam iterativne metode i one se uobičajeno i koriste kod 
+rada s rijetko popunjenim matricama. Neke od mogućih metoda su 
+Jacobieva, Gauss-Seidel, SOR, konjugirani gradijenti, GMRES.
+\bigskip
+\\
+Radi jednostavnosti ova implementacija koristi Gauss-Seidel-ovu metodu 
+koja neće nužno konvergirati za svaku moguću PDJ koju će korisnik unijeti,
+ali će biti dovoljno dobra za standarne probleme nad 2D meshevima.
+\bigskip
+\\ 
+Kao i prije navodim gdje se implementacija može poboljšati. Istraživanjem 
+sam dobio dojam da je GMRES metoda bolji izbor. Također bi potencijalno dobra 
+ideja bila da se provjerava simetričnost i pozitivna definitnost matrice 
+kako bi se primijenila brža metoda koja ovisi o takvim svojstvima 
+matrice.
+
+
+
+
 \subsection{Reprezentacija mesha u računalu}
+lista trojki
 %-------------------------------------------------------------------------------
 \chapter{Rezultati i rasprava}
 \label{pog:rezultati_i_rasprava}
