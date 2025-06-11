@@ -4,7 +4,7 @@
 #include <unordered_map>
 #include <algorithm>
 #include <boost/container/small_vector.hpp>
-#include <cstddef>
+#include <iostream>
 #include <cstdio>
 #include <stdexcept>
 
@@ -172,7 +172,7 @@ public:
   inline ld get(ull i, ull j) {
     //for now linear search
     ull it = R[i];
-    while (C[it] < j) it++;
+    while (it < R[i + 1] && C[it] < j) it++;
     if (C[it] == j) {
       return A[it];
     }
@@ -182,7 +182,7 @@ public:
   inline void set(ull i, ull j, ld val) { 
     //for now linear search
     ull it = R[i];
-    while (C[it] < j) it++;
+    while (it < R[i + 1] && C[it] < j) it++;
     if (C[it] == j) {
       A[it] = val;
     }
@@ -191,7 +191,7 @@ public:
   inline void inc(ull i, ull j, ld val) {
     //for now linear search
     ull it = R[i];
-    while (C[it] < j) it++;
+    while (it < R[i + 1] && C[it] < j) it++;
     if (C[it] == j) {
       A[it] += val;
     }
@@ -231,4 +231,37 @@ public:
   }
 };
 
-
+template <u n, u meshBranchFactor>
+void solveGaussSeidel(
+    Vector<n> &x,
+    SparseMatrix<meshBranchFactor> &M,
+    Vector<n> &b,
+    u numOfIterations) {
+  if (M.numOfRows != n) {
+    throw invalid_argument("dimension error in Gauss-Seidel solver");
+  }
+  for (u i = 0; i < n; i++) x[i] = 1;
+  
+  for (u k = 1; k <= numOfIterations; k++) {
+    for (u i = 0; i < M.numOfRows; i++) {
+      ld sumOfLessThan_i = 0;
+      u j;
+      for (j = M.R[i];
+          j < M.R[i + 1] && M.C[j] < i;
+          j++) {
+        sumOfLessThan_i += M.A[j] * x[M.C[j]];
+      }
+      ld sumOfGreaterThan_i = 0;
+      ld Mii = 0;
+      if (M.C[j] == i) {
+        Mii = M.A[j];
+        j++;
+      } 
+      for (; j < M.R[i + 1]; j++) {
+        sumOfGreaterThan_i += M.A[j] * x[M.C[j]];
+      }
+      x[i] = 
+        (b[i] - sumOfLessThan_i - sumOfGreaterThan_i) / Mii; 
+    }
+  }
+}
