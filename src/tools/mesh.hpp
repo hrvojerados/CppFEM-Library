@@ -59,7 +59,7 @@ public:
     ld yDown = get<1>(bottomRight);
     
     ld x = xLeft;
-    ld N = 0;
+    ull N = 0;
     while (x < xRight) {
       N++;
       x += h;
@@ -104,11 +104,16 @@ public:
     unordered_map<tuple<ull, ull, ull>, bool, TupleHash3ull> addedElements;
     for (ull node : domain) {
       ull p1 = node - 1;
-      ull p2 = node - N - 1;
-      ull p3 = node - N;
       ull p4 = node + 1;
-      ull p5 = node + N + 1;
-      ull p6 = node + N;
+      ull p2;
+      if (node % (N + 1) <= N) p2 = node - N - 2;
+      else p2 = node - N - 1;
+      ull p3 = p2 + 1;
+      ull p6;
+      if (node % (N + 1) <= N) p6 = node + N;
+      else p6 = node + N + 1;
+      ull p5 = p6 + 1;
+
       if (domainMap[p1] && domainMap[p2]) {
         tuple<ull, ull, ull> key = {p2, p1, node};
         if (!addedElements[key]) {
