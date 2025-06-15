@@ -482,7 +482,7 @@ inline ld get(ull i, ull j) {
 Pažljivi čitatelj će primijeti da se pri traženju odgovarajućeg
 stupca (While petlja) radi linearno pretraživanje. Ovaj dio 
 se može ubrzati binarnim pretraživanjem, ali s obzirom na 
-izuzetno malen broj ne nul elementa u jednom stupcu (maksimalno $8$)
+izuzetno malen broj ne nul elementa u jednom stupcu (maksimalno $6$)
 u trenutačnoj implementaciji mesha, upitno je koliko veliko ubrzanje 
 bi se ostvarilo takvom implementacijom.
 \\ 
@@ -573,7 +573,7 @@ for (u k = 1; k <= numOfIterations; k++) {
   }
 \end{verbatim}
 Ovom optimizacijom smo sveli vremensku složenost s 
-$\mathcal{O}(k n^2)$ na $\mathcal{O}(k \cdot 8n)$ odnosno na $\mathcal{O}(k n)$.
+$\mathcal{O}(k n^2)$ na $\mathcal{O}(k \cdot 6n)$ odnosno na $\mathcal{O}(k n)$.
 \bigskip
 \\
 Kao i prije navodim gdje se implementacija može poboljšati. Istraživanjem 

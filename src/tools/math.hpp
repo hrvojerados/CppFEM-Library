@@ -2,8 +2,8 @@
 #pragma once
 
 #include <unordered_map>
+#include <vector>
 #include <algorithm>
-#include <boost/container/small_vector.hpp>
 #include <iostream>
 #include <cstdio>
 #include <stdexcept>
@@ -128,7 +128,7 @@ public:
   ull* R;
 
   SparseMatrix(
-      unordered_map<ull, boost::container::small_vector<ull, meshBranchFactor>> neigbours) {
+      unordered_map<ull, vector<ull>> neigbours) {
       if (neigbours.size() == 0) { 
         throw invalid_argument("SparseMatrix requires non-empty neighbour map.");
       }
