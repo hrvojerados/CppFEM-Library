@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <functional>
 #include <tuple>
@@ -30,7 +31,11 @@ inline ld phi2(ld x, ld y) {
   return y;
 }
 
-SparseMatrix<6> generateStiffnessMatrix(ld M[2][2], pair <ld, ld> a, ld C5, Mesh2D& mesh) {
+SparseMatrix<6> generateStiffnessMatrix(
+    ld M[2][2],
+    pair <ld, ld> a,
+    ld C5,
+    Mesh2D& mesh) {
   SparseMatrix<6> stiffMat = SparseMatrix<6>(mesh.neighbours);
   pair<ld, ld> gradPhi0 = {-1, -1};
   pair<ld, ld> gradPhi1 = {1, 0};
@@ -246,8 +251,6 @@ SparseMatrix<6> generateStiffnessMatrix(ld M[2][2], pair <ld, ld> a, ld C5, Mesh
 
 Vector generateFreeTerm(
     function<ld(ld, ld)> f, 
-    Vector a,
-    ld F,
     Mesh2D mesh) {
   ull n = mesh.numberOfNodes - mesh.boundaryNodeCutOff - 1;
   Vector result = Vector(n);
@@ -304,3 +307,19 @@ Vector generateFreeTerm(
   return result;
 }
 
+Vector solve(
+    function<bool(ld, ld)> inDomain,
+    tuple<ld, ld> topLeft,
+    tuple<ld, ld> bottomRight,
+    ld precision,
+    ld M[2][2],
+    pair<ld, ld> a,
+    ld C5,
+    function<ld(ld, ld)> f) {
+  Mesh2D mesh = Mesh2D(inDomain, topLeft, bottomRight, precision);
+  SparseMatrix<6> A =  generateStiffnessMatrix(M, a, C5, mesh);
+  Vector b = generateFreeTerm(f, mesh);
+  Vector x = Vector(b.size);
+  solveGaussSeidel<6>(x, A, b, 10000);
+  return x;
+}

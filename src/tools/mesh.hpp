@@ -1,5 +1,6 @@
 #pragma once
 #include <cmath>
+#include <set>
 #include <tuple>
 #include <unordered_map>
 #include <vector>
@@ -45,13 +46,14 @@ public:
   vector<tuple<ull, ull, ull>> elements;
   unordered_map<ull, tuple<ld, ld>> getNodeCoordinates;
   unordered_map<tuple<ld, ld>, ull, tupleHash2> getNodeIndex;
-  unordered_map<ull, vector<ull>> neighbours;
+  unordered_map<ull, set<ull>> neighbours;
   
   Mesh2D() = default;
   Mesh2D(function<bool(ld, ld)> inDomain,
       tuple<ld, ld> topLeft,
       tuple<ld, ld> bottomRight,
       ld precision) {
+    numberOfNodes = 0;
     h = precision;
     ld xLeft = get<0>(topLeft);
     ld xRight = get<0>(bottomRight);
@@ -192,8 +194,10 @@ public:
         i++;
       }
     } 
-    if (i + 1 != numberOfNodes)
-      cerr << "hmmm i + 1 != numberOfNodes!!!\n";
+    if (i!= numberOfNodes) {
+      cerr << "hmmm i != numberOfNodes!!!\n";
+      cerr << "i = " << i << "\n";
+    }
 
     unordered_map<ull, tuple<ld, ld>> newGetNodeCoordinates;    
     for (auto [key, val] : getNodeCoordinates) {
@@ -212,12 +216,12 @@ public:
       ull e0 = get<0>(elements[i]);
       ull e1 = get<1>(elements[i]);
       ull e2 = get<2>(elements[i]);
-      neighbours[e0].push_back(e1);
-      neighbours[e0].push_back(e2);
-      neighbours[e1].push_back(e0);
-      neighbours[e1].push_back(e2);
-      neighbours[e2].push_back(e0);
-      neighbours[e2].push_back(e1);
+      neighbours[e0].insert(e1);
+      neighbours[e0].insert(e2);
+      neighbours[e1].insert(e0);
+      neighbours[e1].insert(e2);
+      neighbours[e2].insert(e0);
+      neighbours[e2].insert(e1);
     }
   }
   void print() {

@@ -34,7 +34,7 @@ int main() {
   // A->set(4, 3, 1);
   // A->set(4, 4, 9);
   // A->print();
-  unordered_map<ull, boost::container::small_vector<ull, 8>> neighbours = {
+  unordered_map<ull, set<ull>> neighbours = {
     {0, {}},
     {1, {}},
     {2, {}},
@@ -42,16 +42,18 @@ int main() {
     {4, {}},
   };
   
-  SparseMatrix<8>* A = new SparseMatrix<8>(neighbours);
-  A->set(0, 0, 0.9);
-  A->set(1, 1, 0.9);
-  A->set(2, 2, 0.9);
-  A->set(3, 3, 0.9);
-  A->set(4, 4, 0.9);
+  SparseMatrix<6>* A = new SparseMatrix<6>(neighbours);
+  A->setVal(0, 0, 0.9);
+  A->setVal(1, 1, 0.9);
+  A->setVal(2, 2, 0.9);
+  A->setVal(3, 3, 0.9);
+  A->setVal(4, 4, 0.9);
 
-  Vector<5> b = {3.5, 2.15, 6.28, 6.69, 10};
-  Vector<5> x;
+  Vector b = {3.5, 2.15, 6.28, 6.69, 10};
+  Vector x = Vector(5);
+  A->print();
   solveGaussSeidel(x, *A, b, 100);
   x.print();
   
+  printf("%Lf\n", A->get(0, 1));
 }

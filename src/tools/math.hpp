@@ -2,7 +2,7 @@
 #pragma once
 
 #include <unordered_map>
-#include <vector>
+#include <set>
 #include <algorithm>
 #include <iostream>
 #include <cstdio>
@@ -20,6 +20,7 @@ public:
   ld* V;
   ull size;
   Vector(ull size) {
+    this->size = size;
     V = new ld[size];
     for (ull i = 0; i < size; i++) {
        V[i] = 0;
@@ -37,6 +38,7 @@ public:
 }
 
   Vector(const Vector& other) {
+    size = other.size;
     V = new ld[size];
     for (u i = 0; i < size; i++) {
       V[i] = other.V[i];
@@ -116,12 +118,16 @@ ld dot(const Vector& V1, const Vector& V2) {
 }
 
 Vector operator*(const ld scalar, const Vector& vec) {
-  return vec * scalar;  
+  Vector result = Vector(vec.size);
+  for (ull i = 0; i < vec.size; i++) 
+    result[i] = scalar * result[i];
+  return result;  
 }
 
 template<u meshBranchFactor>
 class SparseMatrix {
 //CSR format matrix
+//NB only square matrix
 public:
   ull numOfElements;
   ull numOfRows;
@@ -129,8 +135,8 @@ public:
   ull* C;
   ull* R;
 
-  SparseMatrix(
-      unordered_map<ull, vector<ull>> neigbours) {
+  SparseMatrix( 
+      unordered_map<ull, set<ull>> neigbours) {
       if (neigbours.size() == 0) { 
         throw invalid_argument("SparseMatrix requires non-empty neighbour map.");
       }
@@ -149,42 +155,58 @@ public:
       for (ull i = 0; i < numOfElements; i++) {
         A[i] = 0;
       }
-
+      
       for (ull i = 0; i < numOfRows; i++) {
-        sort(neigbours[i].begin(), neigbours[i].end());
-        bool isIInserted = false;
         ull j = R[i];
-        for (
-            u it = 0;
-            j < R[i + 1] && it < neigbours[i].size();
-            j++, it++) {
-          if (neigbours[i][it] > i && !isIInserted) {
+        bool isIInserted = false;
+        for (ull n : neigbours[i]) {
+          if (!isIInserted && n > i) {
             C[j] = i;
             isIInserted = true;
             j++;
           }
-          C[j] = neigbours[i][it];
+          C[j] = n;
+          j++;
         }
         if (!isIInserted) {
           C[j] = i;
-        } 
+        }
       }
+      // for (ull i = 0; i < numOfRows; i++) {
+      //   sort(neigbours[i].begin(), neigbours[i].end());
+      //   bool isIInserted = false;
+      //   ull j = R[i];
+      //   for (
+      //       u it = 0;
+      //       j < R[i + 1] && it < neigbours[i].size();
+      //       j++, it++) {
+      //     if (neigbours[i][it] > i && !isIInserted) {
+      //       C[j] = i;
+      //       isIInserted = true;
+      //       j++;
+      //     }
+      //     C[j] = neigbours[i][it];
+      //   }
+      //   if (!isIInserted) {
+      //     C[j] = i;
+      //   } 
+      // }
   }
 
   inline ld get(ull i, ull j) {
     //for now linear search
     ull it = R[i];
-    while (it < R[i + 1] && C[it] < j) it++;
+    while (it < R[i + 1] - 1 && C[it] < j) it++;
     if (C[it] == j) {
       return A[it];
     }
     return 0;
   }
 
-  inline void set(ull i, ull j, ld val) { 
+  inline void setVal(ull i, ull j, ld val) { 
     //for now linear search
     ull it = R[i];
-    while (it < R[i + 1] && C[it] < j) it++;
+    while (it < R[i + 1] - 1 && C[it] < j) it++;
     if (C[it] == j) {
       A[it] = val;
     }
@@ -193,7 +215,7 @@ public:
   inline void inc(ull i, ull j, ld val) {
     //for now linear search
     ull it = R[i];
-    while (it < R[i + 1] && C[it] < j) it++;
+    while (it < R[i + 1] - 1 && C[it] < j) it++;
     if (C[it] == j) {
       A[it] += val;
     }
@@ -233,12 +255,13 @@ public:
   }
 };
 
-template <u n, u meshBranchFactor>
+template <u meshBranchFactor>
 void solveGaussSeidel(
     Vector &x,
     SparseMatrix<meshBranchFactor> &M,
     Vector &b,
     u numOfIterations) {
+  ull n = b.size;
   if (M.numOfRows != n) {
     throw invalid_argument("dimension error in Gauss-Seidel solver");
   }
