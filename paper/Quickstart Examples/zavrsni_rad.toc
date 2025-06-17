@@ -10,8 +10,9 @@
 \contentsline {section}{\numberline {2.4.}Implementacijski detalji}{9}{section.2.4}%
 \contentsline {subsection}{\numberline {2.4.1.}Generiranje mesha}{9}{subsection.2.4.1}%
 \contentsline {subsection}{\numberline {2.4.2.}CSR reprezentacija matrice}{10}{subsection.2.4.2}%
-\contentsline {subsection}{\numberline {2.4.3.}Rješavanje sustava}{12}{subsection.2.4.3}%
-\contentsline {subsection}{\numberline {2.4.4.}Prevođenje koda}{14}{subsection.2.4.4}%
+\contentsline {subsection}{\numberline {2.4.3.}Numerička integracija}{11}{subsection.2.4.3}%
+\contentsline {subsection}{\numberline {2.4.4.}Rješavanje sustava}{12}{subsection.2.4.4}%
+\contentsline {subsection}{\numberline {2.4.5.}Prevođenje koda}{14}{subsection.2.4.5}%
 \contentsline {chapter}{\numberline {3.}Rezultati i rasprava}{15}{chapter.3}%
 \contentsline {chapter}{\numberline {4.}Zaključak}{16}{chapter.4}%
 \contentsline {chapter}{Literatura}{17}{chapter*.7}%

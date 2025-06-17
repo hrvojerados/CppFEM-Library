@@ -15,15 +15,18 @@ using ull = unsigned long long;
 using ld = long double;
 
 
-template<u size>
 class Vector {
 public:
   ld* V;
-
-  Vector() {
+  ull size;
+  Vector(ull size) {
     V = new ld[size];
+    for (ull i = 0; i < size; i++) {
+       V[i] = 0;
+    }
   }
   Vector(initializer_list<ld> init) {
+    size = init.size();
     V = new ld[size];
     u i = 0;
     for (ld val : init) {
@@ -45,7 +48,7 @@ public:
     other.V = nullptr;
   }
 
-  Vector<size>& operator=(const Vector& other) {
+  Vector& operator=(const Vector& other) {
     if (this == &other)
       return *this;
     delete[] V;
@@ -69,16 +72,16 @@ public:
     delete[] V;
   }
 
-  Vector<size> operator+(const Vector& other) const {
-    Vector<size>  result;
+  Vector operator+(const Vector& other) const {
+    Vector result = Vector(size);
     for (u i = 0; i < size; i++) {
       result.V[i] = V[i] + other.V[i];
     } 
     return result;
   }
 
-  Vector<size> operator*(const ld scalar) const {
-    Vector<size>  result;
+  Vector operator*(const ld scalar) const {
+    Vector result = Vector(size);
     for (u i = 0; i < size; i++) {
       result.V[i] = V[i] * scalar;
     }
@@ -103,17 +106,16 @@ public:
 
 };
 
-template<u size>
-ld dot(const Vector<size>& V1, const Vector<size>& V2) {
+ld dot(const Vector& V1, const Vector& V2) {
   ld result = 0;
+  ull size = V1.size;
   for (u i = 0; i < size; i++) {
     result += V1[i] * V2[i];
   }
   return result;
 }
 
-template<u size>
-Vector<size> operator*(const ld scalar, const Vector<size>& vec) {
+Vector operator*(const ld scalar, const Vector& vec) {
   return vec * scalar;  
 }
 
@@ -233,9 +235,9 @@ public:
 
 template <u n, u meshBranchFactor>
 void solveGaussSeidel(
-    Vector<n> &x,
+    Vector &x,
     SparseMatrix<meshBranchFactor> &M,
-    Vector<n> &b,
+    Vector &b,
     u numOfIterations) {
   if (M.numOfRows != n) {
     throw invalid_argument("dimension error in Gauss-Seidel solver");

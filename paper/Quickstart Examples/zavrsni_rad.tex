@@ -106,12 +106,12 @@ Jednadžba koju rješavam na domeni $\Omega \subset \mathbb{R}^2$ je:
 
 \begin{equation}
 	\label{PDJ}
-  A \frac{\partial^2 u}{\partial x^2}
-	+ B \frac{\partial^2 u}{\partial x \partial y}
-	+ C \frac{\partial^2 u}{\partial y^2}
-	+ D \frac{\partial u}{\partial x}
-	+ E \frac{\partial u}{\partial y}
-	+ F u = f(x,y)
+  C_0 \frac{\partial^2 u}{\partial x^2}
+	+ C_1 \frac{\partial^2 u}{\partial x \partial y}
+	+ C_2 \frac{\partial^2 u}{\partial y^2}
+	+ C_3 \frac{\partial u}{\partial x}
+	+ C_4 \frac{\partial u}{\partial y}
+	+ C_5 u = f(x,y)
   \quad u \in C^2(\Omega)
 \end{equation}
 
@@ -220,7 +220,8 @@ Ovo ćemo napraviti za svaki čvor.
 Kada budemo radili račun kao što su numerička integracija i 
 slično nad elementima bit će od velike koristi transformirati
 koordinate tako da element koji trenutačno računamo postane 
-oblika pravokutnog trokuta s vrhovima u $(0,0)$,$(1,0)$,$(0,1)$.
+oblika pravokutnog trokuta s vrhovima u $(0,0)$,$(1,0)$,$(0,1)$. 
+Takav trokut se u literaturi uobičajeno zove referentni element.
 Neka su $(X_0, Y_0)$,$(X_1, Y_1)$,$(X_2, Y_2)$ vrhovi elementa
 kojeg želimo preslikati. Supstitucija $(x, y) \rightarrow (\hat x, \hat y)$
 je dana s:
@@ -228,9 +229,16 @@ je dana s:
   x = (X_1 - X_0)\hat x + (X_2 - X_0)\hat y + X_0 \\ 
   y = (Y_1 - Y_0)\hat x +(Y_2 - Y_0) \hat y + Y_0
 \end{align}
-
-
-
+Potrebno je odrediti kako točno glase bazne funkcije nad 
+referentnim elementom.
+Indeksirajmo čvor $(0,0)$ s $0$, čvor $(1,0)$ s $1$a i 
+čvor $(0, 1)$ s $2$.
+Imamo:
+\begin{align}
+\varphi_0(x,y) = 1 - x - y\\
+\varphi_1(x,y) = x\\
+\varphi_2(x,y) = y
+\end{align}
 \section{Slaba formulacija problema}
 \label{slabaFormulacija}
 Radi daljnje analize potrebno je navesti jedan bitan 
@@ -262,28 +270,28 @@ $$\nabla \cdot (A \nabla u) =
 	+ C \frac{\partial^2 u}{\partial y^2}
 $$
 Gdje:
-$$A = 
+$$M = 
 \begin{pmatrix}
-  A & B \\ 
-  0 & C
+  C_0 & C_1 \\ 
+  0 & C_2
 \end{pmatrix}
  $$
  Također vrijedi:
  $$ \nabla u \cdot a =
- D \frac{\partial u}{\partial x}
-	+ E \frac{\partial u}{\partial y} $$
+ C_3 \frac{\partial u}{\partial x}
+	+ C_4 \frac{\partial u}{\partial y} $$
 
 Gdje:
 $$a = 
 \begin{pmatrix}
-  D\\ 
-  E
+  C_3\\ 
+  C_4
 \end{pmatrix}
 $$
 Time dobivamo sljedeću jednadžbu:
 \begin{equation}
   \label{vektorVerzija}
-\nabla \cdot (A \nabla u)  + \nabla u \cdot a + Fu = f(x,y)
+\nabla \cdot (M \nabla u)  + \nabla u \cdot a + C_5u = f(x,y)
 \end{equation}
 Do slabe formulacije dolazimo tako da obje strane \ref{vektorVerzija} 
 pomnožimo
@@ -291,17 +299,17 @@ s baznom funkcijom $\varphi_i$, integriramo po $\Omega$
 i onda primijenimo  \ref{tm1} 
 imamo:
 \begin{equation}
-  \int_{\Omega}\nabla \cdot (A \nabla u) \varphi_i \, d\Omega  + 
-  \int_{\Omega} \nabla u \cdot a\varphi_i \, d\Omega  + F\int_{\Omega}u\varphi_i\,d\Omega  =
+  \int_{\Omega}\nabla \cdot (M \nabla u) \varphi_i \, d\Omega  + 
+  \int_{\Omega} \nabla u \cdot a\varphi_i \, d\Omega  + C_5\int_{\Omega}u\varphi_i\,d\Omega  =
   \int_{\Omega}f(x,y)\varphi_i \, d\Omega 
 \end{equation}
 Primjenom teorema \ref{tm1} 
 dobije se:
 \begin{equation}
   \label{kobasica}
-  \int_{\partial \Omega}(A \nabla u) \varphi_i \, d\Gamma  - 
-  \int_{\Omega}(A \nabla u) \cdot \nabla \varphi_i \, d\Omega  + 
-  \int_{\Omega} \nabla u \cdot a\varphi_i \, d\Omega  + F\int_{\Omega}u\varphi_i\,d\Omega  =
+  \int_{\partial \Omega}(M \nabla u) \varphi_i \, d\Gamma  - 
+  \int_{\Omega}(M \nabla u) \cdot \nabla \varphi_i \, d\Omega  + 
+  \int_{\Omega} \nabla u \cdot a\varphi_i \, d\Omega  + C_5\int_{\Omega}u\varphi_i\,d\Omega  =
   \int_{\Omega}f(x,y)\varphi_i \, d\Omega 
 \end{equation}
 s obzirom na to da su funkcije $\varphi_i$ po definiciji
@@ -310,8 +318,8 @@ na rubu jednake $0$, jednadžba
 svede na:
 \begin{equation}
   \label{slabaFor}
-  -\int_{\Omega}(A \nabla u) \cdot \nabla \varphi_i \, d\Omega  + 
-  \int_{\Omega} \nabla u \cdot a\varphi_i \, d\Omega  + F\int_{\Omega}u\varphi_i\,d\Omega  =
+  -\int_{\Omega}(M \nabla u) \cdot \nabla \varphi_i \, d\Omega  + 
+  \int_{\Omega} \nabla u \cdot a\varphi_i \, d\Omega  + C_5\int_{\Omega}u\varphi_i\,d\Omega  =
   \int_{\Omega}f(x,y)\varphi_i \, d\Omega 
 \end{equation}
 Primijetimo kako u ovakvom obliku funkcija $f(x,y)$ 
@@ -328,9 +336,9 @@ A x = b
 Gdje:
 \begin{equation}
 \label{elMat}
-(A)_{i,j} = \int_{\Omega} (A\nabla \varphi_j) \cdot \nabla \varphi_i \, d\Omega + 
+(A)_{i,j} = \int_{\Omega} (M\nabla \varphi_j) \cdot \nabla \varphi_i \, d\Omega + 
 \int_{\Omega} (\nabla \varphi_j \cdot a) \varphi_i \, d\Omega +
-F \int_{\Omega} \varphi_j \varphi_i \, d\Omega
+C_5 \int_{\Omega} \varphi_j \varphi_i \, d\Omega
 \end{equation}
 $$b_i = \int_{\Omega} f(x,y) \varphi_i \, d \Omega$$
 
@@ -346,9 +354,9 @@ Sustav \ref{linSustav}
 postaje:
 $$Ax = b - r$$
 gdje je:
-$$r_i = - \int_{\Omega}(A\nabla R) \nabla \varphi_i \, d \Omega +
+$$r_i = - \int_{\Omega}(M\nabla R) \nabla \varphi_i \, d \Omega +
 \int_{\Omega}(\nabla R \cdot a) \varphi_i \, d \Omega +
-F \int_{\Omega} R \varphi_i\, d\Omega
+C_5 \int_{\Omega} R \varphi_i\, d\Omega
 $$
 Time smo problem rješavanja PDJ sveli na problem
 rješavanja linearnog sustava.
@@ -504,6 +512,15 @@ inline void inc(ull i, ull j, ld val) {
 	\label{CSR}
 \end{figure}
 
+\subsection{Numerička integracija}
+Za numeričku integraciju je korištena metoda Gaussovih 
+čvorova odnosno za referentni element $\hat{K}$ integral
+po njemu se može zapisati kao.
+$$\int_{\hat{K}} f(x,y) \, d\hat{K} = \sum_{i = 0}^n w_i f(x_i,y_i)$$
+Gdje su trojke $(x_i, y_i, w_i)$ izračunate unaprijed.
+Moja implementacija koristi sljedeće Gaussove čvorove:
+$(0,0,1/3), (1,0, 1/3),(0,1,1 / 3)$
+
 
 \subsection{Rješavanje sustava}
 
@@ -552,7 +569,7 @@ bi dobili i vremensku efikasnost. Petlja po iteracijama Gauss-Seidela u C++ glas
 \begin{verbatim}
 for (u k = 1; k <= numOfIterations; k++) {
   for (u i = 0; i < M.numOfRows; i++) {
- }   ld sumOfLessThan_i = 0;
+    ld sumOfLessThan_i = 0;
     u j;
     for (j = M.R[i];
         j < M.R[i + 1] && M.C[j] < i;
