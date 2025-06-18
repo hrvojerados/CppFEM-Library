@@ -1,5 +1,6 @@
 #include "../src/tools/math.hpp"
 #include "../src/tools/mesh.hpp"
+#include "../src/assembly.hpp"
 
 #include <unordered_map>
 

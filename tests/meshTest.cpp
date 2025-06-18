@@ -13,7 +13,8 @@ int main() {
 
   Mesh2D mesh = Mesh2D(inDomain,
       {0, 0},
-      {8, 4},
-      1);
+      {8, -4},
+      0.1);
   mesh.checkMesh();
+  mesh.print();
 }
