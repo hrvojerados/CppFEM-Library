@@ -9,19 +9,26 @@
 #include <functional>
 #include <math.h>
 #include <iostream>
- 
 using ll = long long;
 using ull = unsigned long long;
 using ld = long double;
 
 using namespace std;
 
+void printTriple(tuple<ld, ld, ld> t) {
+  cerr << "(" 
+    << get<0>(t) 
+    << ", "
+    << get<1>(t)
+    << ", "
+    << get<2>(t)
+    << ")\n";
+}
 struct TupleHash3ull {
   size_t operator()(const tuple<ull, ull, ull>& t) const {
     size_t h1 = hash<ull>{}(get<0>(t));
     size_t h2 = hash<ull>{}(get<1>(t));
     size_t h3 = hash<ull>{}(get<2>(t));
-
     size_t seed = h1;
     seed ^= h2 + 0x9e3779b9 + (seed << 6) + (seed >> 2);
     seed ^= h3 + 0x9e3779b9 + (seed << 6) + (seed >> 2);
@@ -49,12 +56,17 @@ public:
   unordered_map<ull, set<ull>> neighbours;
   
   Mesh2D() = default;
+
   Mesh2D(function<bool(ld, ld)> inDomain,
       tuple<ld, ld> topLeft,
       tuple<ld, ld> bottomRight,
       ld precision) {
     numberOfNodes = 0;
     h = precision;
+    get<0>(topLeft) -= 5 * (h / 2);
+    get<0>(bottomRight) += 5 * (h / 2);
+    get<1>(topLeft) += 5 * (h / 2);
+    get<1>(bottomRight) -= 5 * (h / 2);
     ld xLeft = get<0>(topLeft);
     ld xRight = get<0>(bottomRight);
     ld yTop = get<1>(topLeft);
@@ -66,12 +78,14 @@ public:
       N++;
       x += h;
     }
+    N--;
     h = (xRight - xLeft) / N;
     ld down = (sqrt(3) / 2) * h;
 
     ld shiftRight = h / 2;
 
     unordered_map<ull, bool> domainMap;
+    bool indent = false;
     x = xLeft;
     ld y = yTop;
     ull ind = 0;
@@ -88,7 +102,9 @@ public:
         ind++;
         x += h;
       }
-      x = xLeft;
+      indent = !indent;
+      if (!indent) x = xLeft;
+      else x = xLeft + shiftRight;
       y -= down;
     }
     /*    2_____3
@@ -106,11 +122,11 @@ public:
       ull p1 = node - 1;
       ull p4 = node + 1;
       ull p2;
-      if (node % (N + 1) <= N) p2 = node - N - 2;
+      if (node % (2 * (N + 1)) <= N) p2 = node - N - 2;
       else p2 = node - N - 1;
       ull p3 = p2 + 1;
       ull p6;
-      if (node % (N + 1) <= N) p6 = node + N;
+      if (node % (2 * (N + 1)) <= N) p6 = node + N;
       else p6 = node + N + 1;
       ull p5 = p6 + 1;
 
@@ -224,6 +240,29 @@ public:
       neighbours[e2].insert(e1);
     }
   }
+
+  void checkMesh() {
+    auto isEquilateral = [&] (tuple<ld, ld> p1, tuple<ld, ld> p2, tuple<ld, ld> p3) {
+      auto dist = [&] (tuple<ld, ld> a, tuple<ld, ld> b) {
+        ld dx = get<0>(a) - get<0>(b);
+        ld dy = get<1>(a) - get<1>(b);
+        return hypot(dx, dy);
+      };
+      ld d1 = dist(p1, p2);
+      ld d2 = dist(p2, p3);
+      ld d3 = dist(p3, p1);
+      const ld EPS = 1e-9;
+      return abs(d1 - d2) < EPS &&
+        abs(d2 - d3) < EPS &&
+        abs(d3 - d1) < EPS;
+    };
+    for (auto [n0, n1, n2] : elements) {
+      if (!isEquilateral(getNodeCoordinates[n0], getNodeCoordinates[n1], getNodeCoordinates[n2])) {
+        cerr << "Oh well\n";
+        cerr << n0 << " " << n1 << " " << n2 << "\n";
+      }
+    }
+  }
   void print() {
     cout << "Number of nodes: " << numberOfNodes << "\n";
     cout << "boundaryNodeCutOff: " << boundaryNodeCutOff << "\n";
@@ -248,9 +287,19 @@ public:
     }
     cout << "neighbours:\n";
     for (ull i = 0; i < numberOfNodes; i++){
-      cout << i << ": ";
+      cout << i << ": "; 
+        // << "(" 
+        // << get<0>(getNodeCoordinates[i])
+        // << ","
+        // << get<1>(getNodeCoordinates[i])
+        // << "): ";
       for (ull n : neighbours[i]) {
         cout << n << " ";
+          // << "(" 
+          // << get<0>(getNodeCoordinates[n])
+          // << ","
+          // << get<1>(getNodeCoordinates[n])
+          // << ")  ";
       }
       cout << "\n";
     }
