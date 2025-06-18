@@ -63,11 +63,11 @@ public:
       ld precision) {
     numberOfNodes = 0;
     h = precision;
-    get<0>(topLeft) -= 5 * (h / 2);
-    get<0>(bottomRight) += 5 * (h / 2);
-    get<1>(topLeft) += 5 * (h / 2);
-    get<1>(bottomRight) -= 5 * (h / 2);
-    ld xLeft = get<0>(topLeft);
+    get<0>(topLeft) -= 2 * h;
+    get<0>(bottomRight) += 2 * h ;
+    get<1>(topLeft) += 2 * h ;
+    get<1>(bottomRight) -= 2 * h;
+    ld xLeft = get<0>(topLeft) + (h / 3);
     ld xRight = get<0>(bottomRight);
     ld yTop = get<1>(topLeft);
     ld yDown = get<1>(bottomRight);
@@ -90,8 +90,10 @@ public:
     ld y = yTop;
     ull ind = 0;
     while (y >= yDown) {
-      while (x <= xRight) {
+      ull cnt = 0;
+      while (cnt != N + 1) {
         tuple<ld, ld> p = {x, y};
+        // cerr << x << " " << y << " " << ind << "\n"; 
         if (inDomain(x, y)) {   
           numberOfNodes++;
           get<0>(getNodeCoordinates[ind]) = x;
@@ -100,6 +102,7 @@ public:
           domainMap[ind] = true;
         } 
         ind++;
+        cnt++;
         x += h;
       }
       indent = !indent;
@@ -107,93 +110,62 @@ public:
       else x = xLeft + shiftRight;
       y -= down;
     }
-    /*    2_____3
-     *   /       \
-     *  1        4
-     *  \       /
-     *   6_____5
-     *   pretpostavka da je broj nodeova manji od 2^63
-     */
-    //uvijek ih sortirane ubacuj
-    // p2 < p3 < p1 < node < p4 < p6 < p5
     unordered_map<ull, bool> isBoundary;
-    unordered_map<tuple<ull, ull, ull>, bool, TupleHash3ull> addedElements;
     for (auto[node, _] : domainMap) {
-      ull p1 = node - 1;
-      ull p4 = node + 1;
-      ull p2;
-      if (node % (2 * (N + 1)) <= N) p2 = node - N - 2;
-      else p2 = node - N - 1;
-      ull p3 = p2 + 1;
-      ull p6;
-      if (node % (2 * (N + 1)) <= N) p6 = node + N;
-      else p6 = node + N + 1;
-      ull p5 = p6 + 1;
-
-      bool isP1In = (domainMap.find(p1) != domainMap.end());
-      bool isP2In = (domainMap.find(p2) != domainMap.end());
-      bool isP3In = (domainMap.find(p3) != domainMap.end());
-      bool isP4In = (domainMap.find(p4) != domainMap.end());
-      bool isP5In = (domainMap.find(p5) != domainMap.end());
-      bool isP6In = (domainMap.find(p6) != domainMap.end());
-
-      if (isP1In && isP2In) {
-        tuple<ull, ull, ull> key = {p2, p1, node};
-        if (!addedElements[key]) {
-          elements.emplace_back(key);
-          addedElements[key] = true;
+      if (node % (N + 1) == N)
+        continue;
+      if (node > N) {
+        //up
+        if (node % (2 * (N + 1)) <= N) {
+          //   p
+          //  / \
+          // /   \
+          // 0---1
+          ull p = node - N - 1;  
+          bool isPIn = (domainMap.find(p) != domainMap.end());
+          bool isNode1In = (domainMap.find(node + 1) != domainMap.end());
+          if (isPIn && isNode1In) {
+            tuple<ull, ull, ull> key = {p, node, node + 1};
+            elements.emplace_back(key);
+          } else {
+            isBoundary[node] = true;
+          }
+        } else if (node % (2 * (N + 1)) > N) {
+          ull p = node - N;
+          bool isPIn = (domainMap.find(p) != domainMap.end());
+          bool isNode1In = (domainMap.find(node + 1) != domainMap.end());
+          if (isPIn && isNode1In) {
+            tuple<ull, ull, ull> key = {p, node, node + 1};
+            elements.emplace_back(key);
+          } else {
+            isBoundary[node] = true;
+          }
         }
-      } else {
-        isBoundary[node] = true;
       }
-      if (isP2In && isP3In) {
-        tuple<ull, ull, ull> key = {p2, p3, node};
-        if (!addedElements[key]) {
-          elements.emplace_back(key);
-          addedElements[key] = true;
+      if (node < ind - 1 - N) {
+        //down
+        if (node % (2 * (N + 1)) <= N) {
+          ull p = node + N + 1;  
+          bool isPIn = (domainMap.find(p) != domainMap.end());
+          bool isNode1In = (domainMap.find(node + 1) != domainMap.end());
+          if (isPIn && isNode1In) {
+            tuple<ull, ull, ull> key = {p, node, node + 1};
+            elements.emplace_back(key);
+          } else {
+            isBoundary[node] = true;
+          }
+        } else if (node % (2 * (N + 1)) > N) {
+          ull p = node + N + 2;
+          bool isPIn = (domainMap.find(p) != domainMap.end());
+          bool isNode1In = (domainMap.find(node + 1) != domainMap.end());
+          if (isPIn && isNode1In) {
+            tuple<ull, ull, ull> key = {p, node, node + 1};
+            elements.emplace_back(key);
+          } else {
+            isBoundary[node] = true;
+          }
         }
-      } else {
-        isBoundary[node] = true;
-      }
 
-      if (isP3In && isP4In) {
-        tuple<ull, ull, ull> key = {p3, node, p4};
-        if (!addedElements[key]) {
-          elements.emplace_back(key);
-          addedElements[key] = true;
-        }
-      } else {
-        isBoundary[node] = true;
-      }
-
-      if (isP4In && isP5In) {
-        tuple<ull, ull, ull> key = {node, p4, p5};
-        if (!addedElements[key]) {
-          elements.emplace_back(key);
-          addedElements[key] = true;
-        }
-      } else {
-        isBoundary[node] = true;
-      }
-
-      if (isP5In && isP6In) {
-        tuple<ull, ull, ull> key = {node, p6, p5};
-        if (!addedElements[key]) {
-          elements.emplace_back(key);
-          addedElements[key] = true;
-        }
-      } else {
-        isBoundary[node] = true;
-      }
-
-      if (isP6In && isP1In) {
-        tuple<ull, ull, ull> key = {p1, node, p6};
-        if (!addedElements[key]) {
-          elements.emplace_back(key);
-          addedElements[key] = true;
-        }
-      } else {
-        isBoundary[node] = true;
       }
     }
 
