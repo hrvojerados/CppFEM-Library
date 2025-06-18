@@ -263,6 +263,7 @@ void solveGaussSeidel(
     u numOfIterations) {
   ull n = b.size;
   if (M.numOfRows != n) {
+    cerr << M.numOfRows << " " << n << "\n";
     throw invalid_argument("dimension error in Gauss-Seidel solver");
   }
   for (u i = 0; i < n; i++) x[i] = 1;

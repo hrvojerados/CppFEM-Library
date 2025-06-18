@@ -45,9 +45,9 @@ SparseMatrix<6> generateStiffnessMatrix(
     tuple<ld, ld> xy0 = mesh.getNodeCoordinates[node0];
     tuple<ld, ld> xy1 = mesh.getNodeCoordinates[node1];
     tuple<ld, ld> xy2 = mesh.getNodeCoordinates[node2];
-    bool isEdge0 = node0 <= mesh.boundaryNodeCutOff;
-    bool isEdge1 = node1 <= mesh.boundaryNodeCutOff;
-    bool isEdge2 = node2 <= mesh.boundaryNodeCutOff;
+    bool isEdge0 = node0 >= mesh.boundaryNodeCutOff;
+    bool isEdge1 = node1 >= mesh.boundaryNodeCutOff;
+    bool isEdge2 = node2 >= mesh.boundaryNodeCutOff;
     ld x0 = get<0>(xy0);
     ld x1 = get<0>(xy1);
     ld x2 = get<0>(xy2);
@@ -252,16 +252,16 @@ SparseMatrix<6> generateStiffnessMatrix(
 Vector generateFreeTerm(
     function<ld(ld, ld)> f, 
     Mesh2D mesh) {
-  ull n = mesh.numberOfNodes - mesh.boundaryNodeCutOff - 1;
+  ull n = mesh.boundaryNodeCutOff;
   Vector result = Vector(n);
   ld gaussNodes[3][3] = {{0, 0, 1.0 / 3.0},{1, 0, 1.0 / 3.0}, {0, 1, 1.0 / 3.0}};
   for (auto [node0, node1, node2] : mesh.elements) {
     tuple<ld, ld> xy0 = mesh.getNodeCoordinates[node0];
     tuple<ld, ld> xy1 = mesh.getNodeCoordinates[node1];
     tuple<ld, ld> xy2 = mesh.getNodeCoordinates[node2];
-    bool isEdge0 = node0 <= mesh.boundaryNodeCutOff;
-    bool isEdge1 = node1 <= mesh.boundaryNodeCutOff;
-    bool isEdge2 = node2 <= mesh.boundaryNodeCutOff;
+    bool isEdge0 = node0 >= mesh.boundaryNodeCutOff;
+    bool isEdge1 = node1 >= mesh.boundaryNodeCutOff;
+    bool isEdge2 = node2 >= mesh.boundaryNodeCutOff;
     ld x0 = get<0>(xy0);
     ld x1 = get<0>(xy1);
     ld x2 = get<0>(xy2);
@@ -315,11 +315,22 @@ Vector solve(
     ld M[2][2],
     pair<ld, ld> a,
     ld C5,
-    function<ld(ld, ld)> f) {
+    function<ld(ld, ld)> f,
+    ull numOfIterations,
+    Mesh2D& returnedMesh) {
   Mesh2D mesh = Mesh2D(inDomain, topLeft, bottomRight, precision);
+  vector<tuple<ull, ull, ull>> newElements;
+  for (auto [n0, n1, n2] : mesh.elements) {
+    if (n0 < mesh.boundaryNodeCutOff && n1 < mesh.boundaryNodeCutOff && n2 < mesh.boundaryNodeCutOff) {
+      newElements.push_back({n0, n1, n2});
+    }
+  }
+  std::swap(mesh.elements, newElements);
+  returnedMesh = mesh;
+
   SparseMatrix<6> A =  generateStiffnessMatrix(M, a, C5, mesh);
   Vector b = generateFreeTerm(f, mesh);
   Vector x = Vector(b.size);
-  solveGaussSeidel<6>(x, A, b, 10000);
+  solveGaussSeidel<6>(x, A, b, numOfIterations);
   return x;
 }

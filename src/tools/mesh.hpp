@@ -81,9 +81,7 @@ public:
     N--;
     h = (xRight - xLeft) / N;
     ld down = (sqrt(3) / 2) * h;
-
     ld shiftRight = h / 2;
-
     unordered_map<ull, bool> domainMap;
     bool indent = false;
     x = xLeft;
@@ -169,22 +167,40 @@ public:
       }
     }
 
-    boundaryNodeCutOff = isBoundary.size();
+    boundaryNodeCutOff = numberOfNodes - isBoundary.size();
     unordered_map<ull, ull> substitution;
     ull i = 0;
-    for (auto [node, _ ] : isBoundary) {
-      substitution[node]  = i;
-      i++;
-    }
     for (auto [node, _] : domainMap) {
       if (!isBoundary[node]) {
+        // cerr << node << "\n";
         substitution[node] = i;
         i++;
       }
     } 
+    if (i != boundaryNodeCutOff) {
+      cerr << "hmmm i != boundaryNodeCutOff!!!\n";
+      cerr
+        << "i = " 
+        << i
+        << " != "
+        << boundaryNodeCutOff
+        << "\n";
+    }
+    for (auto [node, _ ] : isBoundary) {
+      // cerr << node << "\n";
+      if (isBoundary[node]) {
+        substitution[node]  = i;
+        i++;
+      }
+    }
     if (i!= numberOfNodes) {
       cerr << "hmmm i != numberOfNodes!!!\n";
-      cerr << "i = " << i << "\n";
+      cerr 
+        << "i = "
+        << i
+        << " numberOfNodes = "
+        << numberOfNodes
+        << "\n";
     }
 
     unordered_map<ull, tuple<ld, ld>> newGetNodeCoordinates;    
@@ -204,12 +220,30 @@ public:
       ull e0 = get<0>(elements[i]);
       ull e1 = get<1>(elements[i]);
       ull e2 = get<2>(elements[i]);
-      neighbours[e0].insert(e1);
-      neighbours[e0].insert(e2);
-      neighbours[e1].insert(e0);
-      neighbours[e1].insert(e2);
-      neighbours[e2].insert(e0);
-      neighbours[e2].insert(e1);
+      if (e0 < boundaryNodeCutOff) {
+        if (e1 < boundaryNodeCutOff) {
+          neighbours[e0].insert(e1);
+        }
+        if (e2 < boundaryNodeCutOff) {
+          neighbours[e0].insert(e2);
+        } 
+      }
+      if (e1 < boundaryNodeCutOff) {
+        if (e0 < boundaryNodeCutOff) {
+          neighbours[e1].insert(e0);
+        }
+        if (e2 < boundaryNodeCutOff) {
+          neighbours[e1].insert(e2);
+        }
+      }
+      if (e2 < boundaryNodeCutOff) {
+        if (e0 < boundaryNodeCutOff) {
+          neighbours[e2].insert(e0);
+        }
+        if (e1 < boundaryNodeCutOff) {
+          neighbours[e2].insert(e1);
+        }
+      }
     }
   }
 
@@ -230,7 +264,7 @@ public:
     };
     for (auto [n0, n1, n2] : elements) {
       if (!isEquilateral(getNodeCoordinates[n0], getNodeCoordinates[n1], getNodeCoordinates[n2])) {
-        cerr << "Oh well\n";
+        cerr << "element is not euqilateral\n";
         cerr << n0 << " " << n1 << " " << n2 << "\n";
       }
     }
@@ -259,19 +293,12 @@ public:
     }
     cout << "neighbours:\n";
     for (ull i = 0; i < numberOfNodes; i++){
+      if (neighbours.find(i) == neighbours.end()) { 
+        continue;
+      }
       cout << i << ": "; 
-        // << "(" 
-        // << get<0>(getNodeCoordinates[i])
-        // << ","
-        // << get<1>(getNodeCoordinates[i])
-        // << "): ";
       for (ull n : neighbours[i]) {
         cout << n << " ";
-          // << "(" 
-          // << get<0>(getNodeCoordinates[n])
-          // << ","
-          // << get<1>(getNodeCoordinates[n])
-          // << ")  ";
       }
       cout << "\n";
     }
