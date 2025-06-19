@@ -2,7 +2,7 @@
 % Dodaj opciju upload za generiranje konačne verzije koja se učitava na FERWeb
 % Add the option upload to generate the final version which is uploaded to FERWeb
 
-
+\usepackage{float}
 \usepackage{blindtext}
 \usepackage{subcaption}
 \newtheorem{teorem}{Teorem}
@@ -87,11 +87,138 @@ ga analitički. Tim problemima se između ostaloga bavi numerička
 matematika. Ovaj rad se bavi linearnim parcijalnim diferencijalnim
 jednadžbama s konstantnim koeficijentima i rubnim uvjetom odnosno
 traženjem njihova rješenja koristeći Galjorkinovu metodu
-konačnih elemenata. Cilj rada je napraviti
+konačnih elemenata. Cilj rada je pokušati  napraviti
 C++ biblioteku koja služi kao efikasan, ali iznad svega
 jednostavan alat za rješavanje PDJ-ova.
 % Neki od radova koje ćemo citirati su \cite{6248073,6247753,ghiglia_pritt_phase_unwrapping,hartley2003multiple,4250461,123DCatch}.
+\newpage
+\subsection{Definicije i primjeri}
 
+Parcijalne diferencijalne jednadžbe su diferencijalne 
+jednadžbe koje sadrže derivacije nepoznate funkcije s
+obzirom na više varijabli. Označimo s $u$ nepoznatu funkciju
+koju želimo odrediti s $d + 1$ nepoznatih varijabli 
+$\textbf{x} = (x_1, \dots, x_d)^T, t$. Općenita parcijalna diferencijalna 
+jednadžba (PDJ) poprima oblik:
+$$\mathcal{P}(u, g) = F(\textbf{x}, t, u,
+\frac{\partial u}{\partial t},
+\frac{\partial u}{\partial x_1},
+\dots,
+\frac{\partial u}{\partial x_d},
+\dots
+\frac{\partial^{p_1 + \dots + p_d + p_t} u} 
+{\partial x_1^{p_1}\dots\partial x_d^{p_d} \partial t^{p_t}}
+) = 0$$
+gdje $g$ predstavlja skup parametara o kojima PDJ ovisi, a 
+$p_1, p_2, \dots, p_d, p_t \in \mathbb{N}$. Kažemo da 
+je PDJ reda $q$ ako je $q$ maksimalna vrijednost izraza 
+$p_1 + p_2 + \dots + p_d + p_t$. 
+Ako $\mathcal{P}(u,g)$ ovisi lineano o nepoznanici $u$ 
+i o svojim parcijalnim derivacijama, kažemo da je 
+PDJ  linearna.
+\bigskip
+\\ 
+Linearne PDJ su jako česte u praksi kao primjer navodim 
+\textit{transportnu jednadžbu}:
+$$\frac{\partial u}{\partial t} + \nabla \cdot (\beta u) = 0$$
+$\nabla \cdot v$ označava operator divergencije odnosno 
+$\nabla \cdot v = \sum_{i=1}^d \frac{\partial v}{\partial x_i}$
+\bigskip 
+\\
+PDJ kojim ću se u ovom radu baviti je \textit{jednadžba potencijala}.
+\begin{equation}
+  \label{potencijalPDJ}
+- \Delta u = - f 
+\end{equation}
+\ref{potencijalPDJ} se također
+može koristiti za opis vertikalnog pomaka elastične membrane. 
+\bigskip
+\\ 
+\textit{Jednadžba vođenja topline}
+\begin{equation}
+  \frac{\partial u}{\partial t} - \Delta u = f
+\end{equation}
+\bigskip 
+\\ 
+S $\Delta$ označavam Laplaceov operator.
+$\Delta u = \sum_{i = 1}^d \frac{\partial^2 u}{\partial x_i ^2}$ 
+\bigskip 
+\\
+\textit{Valna jednadžba}
+\begin{equation}
+  \frac{\partial ^2 u}{\partial^2 t} - \Delta u = 0
+\end{equation}
+
+Iako nisu glavni predmet proučavanja ovog rada, navodim 
+i neke nelinearne PDJ.
+Jedna od njih se zove \textit{Burgersova jednadžba}.
+$$\frac{\partial u}{\partial t} +
+u \frac{\partial u}{\partial x_i}$$
+Pred kraj dajem proizvoljnu nelinearnu PDJ. 
+$$\Big(\frac{\partial^2 u}{\partial x_1 ^2}\Big)^2 +
+\Big(\frac{\partial^2 u}{\partial x_2 ^2}\Big)^2 = f$$
+
+\subsection{Numeričko rješenje}
+Općenito nije moguće pronaći rješenje od $\mathcal{P}(u,g)$ 
+u eksplicitnom obliku. Neke stardardne metode kao što 
+su separacija varijabli su veoma ograničene po tom pitanju.
+Čak kada je poznat
+\bigskip
+\\ 
+Mogućnost odabira proizvoljnih rubnih uvjeta značajno 
+podiže složenost ovog problema. Iz perspektive matematičke 
+teorije, analiza PDJ-ova je uglavnom ograničena na  
+postojanje, jedinstvenost i regularnost rješenja, no 
+nedostaju moćni alati za njihovo rješavanje. 
+\bigskip
+\\ 
+Iz gornje rasprave slijedi da je bitno imati 
+razvijene numeričke metode za rješavanje PDJ-ova koje 
+ne rješavaju danu parcijalnu jednadžbu, nego daju dovoljno 
+dobru aproksimaciju njezina rješenja.općenito rješenje neke PDJ, nije garantirano 
+da je moguće pronaći partikularno rješenje, stoga 
+se zadaju tkz. rubni uvjeti na $u$ ili njezine derivacije na 
+rubu domene $\Omega$ s koje se funkcija $u$ preslikava.
+\bigskip
+\\ 
+Mogućnost odabira proizvoljnih rubnih uvjeta značajno 
+podiže složenost ovog problema. Iz perspektive matematičke 
+teorije, analiza PDJ-ova je uglavnom ograničena na  
+postojanje, jedinstvenost i regularnost rješenja, no 
+nedostaju moćni alati za njihovo rješavanje. 
+\bigskip
+\\ 
+Iz gornje rasprave slijedi da je bitno imati 
+razvijene numeričke metode za rješavanje PDJ-ova koje 
+ne rješavaju danu parcijalnu jednadžbu, nego daju dovoljno 
+dobru aproksimaciju njezina rješenja.
+\newpage 
+
+\subsection{Klasifikacija parcijalnih diferencijalnih jednadžbi}
+Parcijalne diferencijalne jednadžbe se mogu svrstati u 
+tri različite kategorije \textit{eliptičke},
+\textit{paraboličke} i \textit{hiperboličke}.
+\\
+Radi konciznosti ograničit ću ovo podpoglavlje na linearne PDJ-ove s 
+konstantnim koeficijentima oblika:
+$$
+A\frac{\partial^2 u}{\partial x_1^2}
++ B \frac{\partial^2 u}{\partial x_1 \partial x_2}
++ C \frac{\partial^2 u}{\partial x_2^2}
++ D \frac{\partial u}{\partial x}
++ E \frac{\partial u}{\partial y}
++ F u = G
+$$
+Gdje $A,B,C,D,E,F,G \in \mathbb{R}$.
+Klasifikacija se radi na temelju vrijednosti $\Delta = B^2 - 4AC$
+\begin{center}
+  Ako $\Delta < 0$, jednadžba je eliptička\\ 
+  Ako $\Delta = 0$, jednadžba je parabolička\\ 
+  Ako $\Delta > 0$, jednadžba je hiperbolička 
+\end{center}
+Za kasnije je bitno uočiti da je jednadžba
+potencijala \ref{potencijalPDJ}
+eliptička. 
 
 %-------------------------------------------------------------------------------
 \chapter{Glavni dio}
@@ -105,14 +232,14 @@ u narednim poglavljima ulazim u detalje.
 Jednadžba koju rješavam na domeni $\Omega \subset \mathbb{R}^2$ je:
 
 \begin{equation}
-	\label{PDJ}
-  C_0 \frac{\partial^2 u}{\partial x^2}
-	+ C_1 \frac{\partial^2 u}{\partial x \partial y}
-	+ C_2 \frac{\partial^2 u}{\partial y^2}
-	+ C_3 \frac{\partial u}{\partial x}
-	+ C_4 \frac{\partial u}{\partial y}
-	+ C_5 u = f(x,y)
-  \quad u \in C^2(\Omega)
+\label{PDJ}
+C_0 \frac{\partial^2 u}{\partial x^2}
++ C_1 \frac{\partial^2 u}{\partial x \partial y}
++ C_2 \frac{\partial^2 u}{\partial y^2}
++ C_3 \frac{\partial u}{\partial x}
++ C_4 \frac{\partial u}{\partial y}
++ C_5 u = f(x,y)
+\quad u \in C^2(\Omega)
 \end{equation}
 
 Ključna ideja ove metode je particioniranje domene na
@@ -202,6 +329,8 @@ slici.
 	\caption{najdulja stranica trokuta $h_k$ i promjer
   upisane kružnice $\rho_k$}
 \end{figure}
+
+\newpage
 \subsection{Bazne funkcije}
 
 Nakon uspješno generiranog mesha je potrebno definirati
@@ -239,6 +368,7 @@ Imamo:
 \varphi_1(x,y) = x\\
 \varphi_2(x,y) = y
 \end{align}
+\newpage
 \section{Slaba formulacija problema}
 \label{slabaFormulacija}
 Radi daljnje analize potrebno je navesti jedan bitan 
@@ -394,6 +524,7 @@ može svesti na problem s linearnim funkcionalima iz
 postojanje rješenja možemo garantirati samo za ispravan mesh
 (to garantira implementacija) i za eliptičke PDJ što se lako provjeri programski.
 
+\newpage
 \section{Implementacijski detalji}
 \label{implementacijaOpis}
 Sada kada je jasna matematička pozadina 
@@ -511,7 +642,7 @@ inline void inc(ull i, ull j, ld val) {
 	\caption{grafički prikaz CSR reprezentacije matrice $A$}
 	\label{CSR}
 \end{figure}
-
+\newpage
 \subsection{Numerička integracija}
 Za numeričku integraciju je korištena metoda Gaussovih 
 čvorova odnosno za referentni element $\hat{K}$ integral
@@ -544,10 +675,12 @@ rada s rijetko popunjenim matricama. Neke od mogućih metoda su
 Jacobijeva, Gauss-Seidel, SOR, konjugirani gradijenti, GMRES.
 \bigskip
 \\
-Radi jednostavnosti ova implementacija koristi Gauss-Seidel-ovu metodu 
-koja neće nužno konvergirati za svaku moguću PDJ koju će korisnik unijeti,
-ali će biti dovoljno dobra za standardne probleme nad 2D meshevima.
-U nastavku dajem pseudokod Gauss-Seidela:
+Radi jednostavnosti na početku je implementirana Gauss-Seidel-ova metoda 
+koja nije uvijek konvergirala na testovima, potom je dodatno implementirana 
+metoda konjugiranih gradijenata.
+U nastavku dajem pseudokod Gauss-Seidela i kratki 
+opis metode konjugiranih gradijenata. Implementacije Gauss-Seidel-a i
+metode konjugiranih gradijenata se mogu pronaći u izvornom kodu.
 \begin{verbatim}
 ##rješavanje sustava Ax = b Gauss-Seidelom
 Uzimamo neki vektor x duljine n
@@ -593,6 +726,21 @@ Ovom optimizacijom smo sveli vremensku složenost s
 $\mathcal{O}(k n^2)$ na $\mathcal{O}(k \cdot 6n)$ odnosno na $\mathcal{O}(k n)$.
 \bigskip
 \\
+Neću ulaziti toliko detaljno u metodu konjugiranih gradijenata, 
+ali ukratko ona za sustav $\textbf{A}\textbf{x} = \textbf{b}$ ovako glasi: 
+\\ 
+\textit{Odaberemo početnu aproksimaciju} $\textbf{x}_0 \in \mathbb{R}^n$
+\\ 
+\textit{Izračunamo rezidual} $\textbf{r}_0 = \textbf{b} - \textbf{A}\textbf{x}_0$
+\textit{i postavimo početni smjer} $\textbf{p}_0 = \textbf{r}_0$ 
+\\ 
+\textit{Za svaki korak} $k$ \textit{računamo} $\alpha_k = 
+\frac{\textbf{r}_k^T\textbf{r}_k}{\textbf{p}_k^T\textbf{A}\textbf{p}_k}$ 
+\textit{i ažuriramo rješenje, ostatak i pomak.} 
+$$\textbf{x}_{k+1} = \textbf{x}_k + \alpha_k \textbf{p}_k$$
+$$\textbf{r}_{k + 1} = \textbf{r}_k - \alpha_k \textbf{A} \textbf{p}_k$$ 
+$$\beta_k = \frac{\textbf{r}_{k + 1}^T\textbf{r}_{k + 1}}{\textbf{r}_k^T\textbf{r}_k} $$
+$$\textbf{p}_{k + 1} = \textbf{r}_{k + 1} + \beta_k  \textbf{p}_k$$
 Kao i prije navodim gdje se implementacija može poboljšati. Istraživanjem 
 sam dobio dojam da je GMRES metoda bolji izbor. Također bi bila
 potencijalno dobra 
@@ -600,16 +748,109 @@ ideja da se provjerava simetričnost i pozitivna definitnost matrice
 kako bi se primijenila brža metoda koja ovisi o tim svojstvima 
 matrice.
 
-\subsection{Prevođenje koda}
-\textit{Ovdje ću malo prokomentirati koje sam točno zastavice
-i opcije koristio pri prevođenju moje implementacije.}
-
+\subsection{Prevođenje i izvođenje koda}
+C++ kod je prevođen uz O3 optimizacije. Nisam htio 
+previše eksperimentirati s C++ bibliotekama za crtanje grafova, pa 
+sam odlučio stdout glavnog C++ programa preusmjeriti "pipe" na ulaz 
+jednostavne python skripte za crtanje grafova.
 
 %-------------------------------------------------------------------------------
 \chapter{Rezultati i rasprava}
 \label{pog:rezultati_i_rasprava}
+Testiranje funkcionalnosti sam radio na jednadžbi 
+potencijala \ref{potencijalPDJ}. 
+Egzaktna rješenja sam dobio tako da bih odabrao neko egzaktno rješenje i 
+potom bih ga uvrstio u jednadžbu i vidio kako glasi funkcija pobude ($f(x,y)$).
+Za početak predstavljam rezultate sljedećeg problema:
+\begin{equation}
+  \Delta u = - 2 * \pi^2 \sin{(\pi x)}\sin{(\pi y)}, \quad (x,y) \in \Omega,
+  \, \Omega = [0,1] \times [0,1], \, u |_{ \partial \Omega} = 0
+\end{equation}
+Egzaktno rješenje glasi $u(x,y) = \sin{(\pi x)}\sin{(\pi y)}$, također 
+dajem i grafički prikaz \ref{sinsinEgz}
+\bigskip
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.75\linewidth]{Figures/sinsinEgz.png}
+	\caption{Izrađeno u geogebri}
+  \label{sinsinEgz}
+\end{figure}
 
+\newpage
+Za elemente reda veličine $0.01$ moja C++ implementacija daje sljedeći 
+rezultat \ref{numerSinSin001}.
+\begin{figure}[H]
+	\centering
+  \includegraphics[width=1.2\linewidth]{Figures/numersinsin001.png}
+	\caption{preciznost od $0.01$}
+  \label{numerSinSin001}
+\end{figure}
+\newpage
+Vrlo se lako uoče nepravilnosti na pravcu $x=0$, 
+kao i nešto veći maksimum ($1.4 > 1$)
+Dodatnim usitnjavanjem mesha (red veličine $0.0025$
+dobije se sljedeće:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.2\linewidth]{Figures/numersinsin00025.png}
+	\caption{preciznost od $0.00025$}
+  \label{numerSinSin00025}
+\end{figure}
+\newpage
+Raznim eksperimentiranjem i obzervacijama zaključio sam da je problem
+u meshu. Naime, moje implementacije koje su bile izrađene isključivo 
+za pravokutne domene (te su bile napisane u pythonu). Koriste mesh 
+koji je bolje prilagođen obliku pravokutnika daju sljedeći rezultat:
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Figures/numersinsin.png}
+	\caption{}
+  \label{numerSinSin}
+\end{figure}
+Što je dosta dobra aproksimacija.
+Ako usporedimo mesheve koji se koriste u ovim implementacijama,
+problem postaje jasniji.
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.35\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{Figures/2Dmesh.png}
+    \caption{Mesh prilagođeniji pravokutniku}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.35\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{Figures/hexmesh-modified.png}
+    \caption{Mesh koji daje lošije rezultate}
+  \end{subfigure}
+\end{figure}
+Isprekinuti dio lošijeg mesha je upravo onaj dio na 
+kojem se aproksimacija čudno ponaša. 
+\\
+Možemo pokušati riješiti pokuju PDJ i na drugačijim domenama.
+\begin{equation}
+  \Delta u = 2(x +y),\, 0 \leq x, \, 0 \leq y, \, x + y \leq 1 
+  \, u |_{ \partial \Omega} = 0
+\end{equation}
+Egzaktno rješenje glasi $u(x,y) = xy(1- x - y)$, također 
+dajem i grafički prikaz \ref{xy1xy}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{Figures/xy1xy.png}
+	\caption{Izrađeno u geogebri}
+  \label{xy1xy}
+\end{figure}
+Numeričko rješenje će se opet ponašati loše na pravcu $x=0$.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Figures/numerxy1xy.png}
+	\caption{preciznost od $0.01$}
+  \label{}
+\end{figure}
+\newpage
 
 %--- ZAKLJUČAK / CONCLUSION ----------------------------------------------------
 \chapter{Zaključak}

@@ -56,7 +56,14 @@ SparseMatrix<6> generateStiffnessMatrix(
     ld y2 = get<1>(xy2);
     ld detJ = abs((x1 - x0) * (y2 - y0) - (x2 - x0) * (y1 - y0)); 
     //K is transpose of inverse of J multiplied by detJ
-    ld K[2][2] = {{y2 - y0, y0 - y1}, {x0 - x2, x1 - x0}};
+    ld K[2][2] = {{y2 - y0, x0 - x2}, {y0 - y1, x1 - x0}};
+    // for (int i = 0; i < 2; i++) {
+    //   for (int j = 0; j < 2; j++) {
+    //     cerr << M[i][j] << " ";
+    //   }
+    //   cerr << "\n";
+    // }
+    // ld K[2][2] = {{y2 - y0, y0 - y1}, {x0 - x2, x1 - x0}};
     ld grad0grad1 = (dot(
           applyMat(M, applyMat(K, gradPhi0)),
           applyMat(K, gradPhi1)
@@ -93,7 +100,6 @@ SparseMatrix<6> generateStiffnessMatrix(
           applyMat(M, applyMat(K, gradPhi2)),
           applyMat(K, gradPhi2)
           )) / (2 * detJ);
-
     ld grad0Phi1 = 0;
     for (int i = 0; i < 3; i++) {
       grad0Phi1 += gaussNodes[i][2] * phi1(gaussNodes[i][0], gaussNodes[i][1]);
@@ -307,6 +313,37 @@ Vector generateFreeTerm(
   return result;
 }
 
+// Vector generateBoundaryTerm(
+//     function<ld(ld, ld)> R, 
+//     Mesh2D mesh) {
+//   ull n = mesh.boundaryNodeCutOff;
+//   Vector result = Vector(n);
+//   ld gaussNodes[3][3] = {{0, 0, 1.0 / 3.0},{1, 0, 1.0 / 3.0}, {0, 1, 1.0 / 3.0}};
+//   for (auto [node0, node1, node2] : mesh.elements) {
+//     tuple<ld, ld> xy0 = mesh.getNodeCoordinates[node0];
+//     tuple<ld, ld> xy1 = mesh.getNodeCoordinates[node1];
+//     tuple<ld, ld> xy2 = mesh.getNodeCoordinates[node2];
+//     bool isEdge0 = node0 >= mesh.boundaryNodeCutOff;
+//     bool isEdge1 = node1 >= mesh.boundaryNodeCutOff;
+//     bool isEdge2 = node2 >= mesh.boundaryNodeCutOff;
+//     ld x0 = get<0>(xy0);
+//     ld x1 = get<0>(xy1);
+//     ld x2 = get<0>(xy2);
+//     ld y0 = get<1>(xy0);
+//     ld y1 = get<1>(xy1);
+//     ld y2 = get<1>(xy2);
+//     ld detJ = abs((x1 - x0) * (y2 - y0) - (x2 - x0) * (y1 - y0)); 
+//     auto subsX = [&] (ld xHat, ld yHat) {
+//       return (x1 - x0) * xHat + (x2 - x0) * yHat + x0; 
+//     }; 
+//     auto subsY = [&] (ld xHat, ld yHat) {
+//       return (y1 - y0) * xHat + (y2 - y0) * yHat + y0; 
+//     }; 
+//
+//   }
+//   return result;
+// }
+
 Vector solve(
     function<bool(ld, ld)> inDomain,
     tuple<ld, ld> topLeft,
@@ -317,20 +354,17 @@ Vector solve(
     ld C5,
     function<ld(ld, ld)> f,
     ull numOfIterations,
-    Mesh2D& returnedMesh) {
+    Mesh2D &returnMesh,
+    ull &numOfElementsToGraph) {
   Mesh2D mesh = Mesh2D(inDomain, topLeft, bottomRight, precision);
   vector<tuple<ull, ull, ull>> newElements;
-  for (auto [n0, n1, n2] : mesh.elements) {
-    if (n0 < mesh.boundaryNodeCutOff && n1 < mesh.boundaryNodeCutOff && n2 < mesh.boundaryNodeCutOff) {
-      newElements.push_back({n0, n1, n2});
-    }
-  }
-  std::swap(mesh.elements, newElements);
-  returnedMesh = mesh;
-
   SparseMatrix<6> A =  generateStiffnessMatrix(M, a, C5, mesh);
+  // A.print();
   Vector b = generateFreeTerm(f, mesh);
+  // b.print();
   Vector x = Vector(b.size);
-  solveGaussSeidel<6>(x, A, b, numOfIterations);
+  solveCG<6>(x, A, b, numOfIterations);
+  returnMesh = mesh;
+  numOfElementsToGraph = mesh.numOfElementsToGraph;
   return x;
 }

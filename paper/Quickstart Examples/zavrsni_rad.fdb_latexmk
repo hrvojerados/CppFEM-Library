@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex zavrsni_rad"] 1750145459.5296 "zavrsni_rad.aux" "zavrsni_rad.bbl" "zavrsni_rad" 1750152657.69348 0
+["bibtex zavrsni_rad"] 1750359479.04109 "zavrsni_rad.aux" "zavrsni_rad.bbl" "zavrsni_rad" 1750359480.17717 0
   "./fer_IEEEtran_HR.bst" 1623666897 60896 90d69aefaad7b24856119a58e789af2e ""
   "./literatura.bib" 1749654888.01732 196 df7ff63b117d3ae63e9872208663f261 ""
-  "zavrsni_rad.aux" 1750152657.49004 6307 e73f76a5e8bc75cfc01f2cbf21926088 "pdflatex"
+  "zavrsni_rad.aux" 1750359479.96337 8314 e554469be8c9c83900b051e893d7d625 "pdflatex"
   (generated)
   "zavrsni_rad.bbl"
   "zavrsni_rad.blg"
   (rewritten before read)
-["pdflatex"] 1750152656.67076 "zavrsni_rad.tex" "zavrsni_rad.pdf" "zavrsni_rad" 1750152657.69359 0
+["pdflatex"] 1750359479.10649 "zavrsni_rad.tex" "zavrsni_rad.pdf" "zavrsni_rad" 1750359480.17735 0
   "../fer.cls" 1623666897 27127 b6eafcb69e4cae87147606c61c03c61d ""
   "/etc/texmf/web2c/texmf.cnf" 1749332422.66809 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/opensans/a_jg4h6q.enc" 1561498186 2952 84fda6c8ae8be17712e9d998ffe48bad ""
@@ -114,6 +114,7 @@
   "/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty" 1579991033 13886 d1306dcf79a944f6988e688c1785f9ce ""
   "/usr/share/texlive/texmf-dist/tex/latex/eso-pic/eso-pic.sty" 1683144721 11876 6ef493863ae0d7a984706973240c2237 ""
   "/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty" 1601931149 46845 3b58f70c6e861a13d927bff09d35ecbc ""
+  "/usr/share/texlive/texmf-dist/tex/latex/float/float.sty" 1137110151 6749 16d2656a1984957e674b149555f1ea1d ""
   "/usr/share/texlive/texmf-dist/tex/latex/fontaxes/fontaxes.sty" 1595539507 14310 41fdb35c51be792ddf00696848d0cfef ""
   "/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty" 1578002852 41601 9cf6c5257b1bc7af01a58859749dd37a ""
   "/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg" 1459978653 1213 620bba36b25224fa9b7e1ccb4ecb76fd ""
@@ -175,13 +176,20 @@
   "Figures/baznaFja.png" 1749374438.792 14850 094fad6b2700b21d4f5b8bd5a20a4a8e ""
   "Figures/csr.png" 1749462930.79943 16445 7cb4d10d5024b1ae29de2a4cfa35df3d ""
   "Figures/element.png" 1749913717.46923 7830 5f2d79bbd2334bb5a190f4b3953d4c46 ""
+  "Figures/hexmesh-modified.png" 1750355918.81205 48378 a7512d1aa9b54a32d834bc323df1ed36 ""
   "Figures/nit.png" 1749372779.52688 478213 2e2ae4ee926a07575d9d0904dd2929b3 ""
+  "Figures/numersinsin.png" 1750355176.02925 236566 41869d1308ac9140f0068806089a62a1 ""
+  "Figures/numersinsin00025.png" 1750354707.29988 435621 114b33fbe96bce3c4ebb11d9df2508c6 ""
+  "Figures/numersinsin001.png" 1750354186.28651 467149 cd76e3ffd29c639b2228a2e08fcfafa9 ""
+  "Figures/numerxy1xy.png" 1750358329.64456 346491 fb13850dc08ced645302dabc2bd7ef22 ""
+  "Figures/sinsinEgz.png" 1750353652.11932 63911 62b815ef864e264f718fc2e868500c2e ""
+  "Figures/xy1xy.png" 1750358099.35107 26065 b69e8d85e30af5447dab345d227aea51 ""
   "Files/zadatak.pdf" 1749370985.27665 15710 6479e3eef4440279e15ed3b71264d44c ""
-  "zavrsni_rad.aux" 1750152657.49004 6307 e73f76a5e8bc75cfc01f2cbf21926088 "pdflatex"
-  "zavrsni_rad.bbl" 1750145459.58713 1033 747ba36a521b5353587cfb9b8ccd0661 "bibtex zavrsni_rad"
-  "zavrsni_rad.out" 1750152657.49204 2301 947022e39bb46a8762aa9f956d217c4e "pdflatex"
-  "zavrsni_rad.tex" 1750151314.03532 23097 03c05f3bf3d7f53b0062d69cbbddbb14 ""
-  "zavrsni_rad.toc" 1750152657.49304 1700 9d5eb3f0334023da18f0885a63d60606 "pdflatex"
+  "zavrsni_rad.aux" 1750359479.96337 8314 e554469be8c9c83900b051e893d7d625 "pdflatex"
+  "zavrsni_rad.bbl" 1750359479.10235 1033 747ba36a521b5353587cfb9b8ccd0661 "bibtex zavrsni_rad"
+  "zavrsni_rad.out" 1750359479.96637 3044 04eb75cdce8583537c4634a25b61c48a "pdflatex"
+  "zavrsni_rad.tex" 1750359476.12131 32013 ff74d3a253fe467dd0b55266a59b3650 ""
+  "zavrsni_rad.toc" 1750359479.96637 2027 4338e32ae17f39fcb03519c2dad8f045 "pdflatex"
   (generated)
   "zavrsni_rad.aux"
   "zavrsni_rad.log"

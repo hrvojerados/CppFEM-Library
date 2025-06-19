@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.6.7)  17 JUN 2025 11:30
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.6.7)  19 JUN 2025 20:57
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -484,44 +484,51 @@ Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 285.
 )
 \Hy@SectionHShift=\skip56
-)) (/usr/share/texlive/texmf-dist/tex/latex/blindtext/blindtext.sty
+)) (/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count300
+\float@exts=\toks31
+\float@box=\box55
+\@float@everytoks=\toks32
+\@floatcapt=\box56
+) (/usr/share/texlive/texmf-dist/tex/latex/blindtext/blindtext.sty
 Package: blindtext 2012/01/06 V2.0 blindtext-Package
  (/usr/share/texlive/texmf-dist/tex/latex/tools/xspace.sty
 Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
 )
-\c@blindtext=\count300
-\c@Blindtext=\count301
-\c@blind@countparstart=\count302
-\blind@countxx=\count303
-\blindtext@numBlindtext=\count304
-\blind@countyy=\count305
-\c@blindlist=\count306
-\c@blindlistlevel=\count307
-\c@blindlist@level=\count308
-\blind@listitem=\count309
-\c@blind@listcount=\count310
-\c@blind@levelcount=\count311
-\blind@mathformula=\count312
-\blind@Mathformula=\count313
-\c@blind@randomcount=\count314
-\c@blind@randommax=\count315
-\c@blind@pangramcount=\count316
-\c@blind@pangrammax=\count317
+\c@blindtext=\count301
+\c@Blindtext=\count302
+\c@blind@countparstart=\count303
+\blind@countxx=\count304
+\blindtext@numBlindtext=\count305
+\blind@countyy=\count306
+\c@blindlist=\count307
+\c@blindlistlevel=\count308
+\c@blindlist@level=\count309
+\blind@listitem=\count310
+\c@blind@listcount=\count311
+\c@blind@levelcount=\count312
+\blind@mathformula=\count313
+\blind@Mathformula=\count314
+\c@blind@randomcount=\count315
+\c@blind@randommax=\count316
+\c@blind@pangramcount=\count317
+\c@blind@pangrammax=\count318
 ) (/usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
 Package: subcaption 2023/07/28 v1.6b Sub-captions (AR)
 Package caption Info: New subtype `subfigure' on input line 238.
-\c@subfigure=\count318
+\c@subfigure=\count319
 Package caption Info: New subtype `subtable' on input line 238.
-\c@subtable=\count319
+\c@subtable=\count320
 )
-\c@teorem=\count320
+\c@teorem=\count321
 LaTeX Font Info:    Trying to load font information for T1+stix2 on input line 36.
  (/usr/share/texlive/texmf-dist/tex/latex/stix2-type1/t1stix2.fd
 File: t1stix2.fd 2018/04/02 v2.0.0-latex stix2 T1 font definitions
 ) (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count321
-\l__pdf_internal_box=\box55
+\l__color_backend_stack_int=\count322
+\l__pdf_internal_box=\box57
 ) (./zavrsni_rad.aux)
 \openout1 = `zavrsni_rad.aux'.
 
@@ -555,8 +562,8 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 36.
 LaTeX Font Info:    ... okay on input line 36.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 36.
 LaTeX Font Info:    ... okay on input line 36.
-\c@mv@tabular=\count322
-\c@mv@boldtabular=\count323
+\c@mv@tabular=\count323
+\c@mv@boldtabular=\count324
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -594,17 +601,17 @@ LaTeX Font Info:    ... okay on input line 36.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count324
+\scratchcounter=\count325
 \scratchdimen=\dimen180
-\scratchbox=\box56
-\nofMPsegments=\count325
-\nofMParguments=\count326
-\everyMPshowfont=\toks31
-\MPscratchCnt=\count327
+\scratchbox=\box58
+\nofMPsegments=\count326
+\nofMParguments=\count327
+\everyMPshowfont=\toks33
+\MPscratchCnt=\count328
 \MPscratchDim=\dimen181
-\MPnumerator=\count328
-\makeMPintoPDFobject=\count329
-\everyMPtoPDFconversion=\toks32
+\MPnumerator=\count329
+\makeMPintoPDFobject=\count330
+\everyMPtoPDFconversion=\toks34
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
@@ -620,6 +627,7 @@ Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 ))
 Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: End \AtBeginDocument code.
 LaTeX Info: Command `\dddot' is already robust on input line 36.
@@ -682,7 +690,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/opensans/a_jg4h6q.enc}]
-<Files/zadatak.pdf, id=81, 598.235pt x 845.1575pt>
+<Files/zadatak.pdf, id=93, 598.235pt x 845.1575pt>
 File: Files/zadatak.pdf Graphic file (type pdf)
 <use Files/zadatak.pdf>
 Package pdftex.def Info: Files/zadatak.pdf  used on input line 47.
@@ -691,7 +699,7 @@ File: Files/zadatak.pdf Graphic file (type pdf)
 <use Files/zadatak.pdf>
 Package pdftex.def Info: Files/zadatak.pdf  used on input line 47.
 (pdftex.def)             Requested size: 598.23354pt x 845.15544pt.
-<Files/zadatak.pdf, id=84, page=1, 598.235pt x 845.1575pt>
+<Files/zadatak.pdf, id=96, page=1, 598.235pt x 845.1575pt>
 File: Files/zadatak.pdf Graphic file (type pdf)
 <use Files/zadatak.pdf, page 1>
 Package pdftex.def Info: Files/zadatak.pdf , page1 used on input line 47.
@@ -724,117 +732,171 @@ LaTeX Font Info:    Font shape `T1/opensans-TLF/bx/n' in size <18> not available
 (Font)              Font shape `T1/opensans-TLF/b/n' tried instead on input line 63.
 LaTeX Font Info:    Font shape `T1/opensans-TLF/b/n' will be
 (Font)              scaled to size 18.0pt on input line 63.
- (./zavrsni_rad.toc)
+ (./zavrsni_rad.toc
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.32 ...}{\numberline {A:}The Code}{29}{chapter.1}
+                                                  % [1
+
+
+])
 \tf@toc=\write4
 \openout4 = `zavrsni_rad.toc'.
 
 
-pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.67 \chapter
-             {Uvod} [1
-
-
-]
-Poglavlje 1..
-
 pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.97 \chapter
-             {Glavni dio} [2
-
-]
-Poglavlje 2..
-<Figures/nit.png, id=137, 1027.84pt x 1027.84pt>
-File: Figures/nit.png Graphic file (type png)
-<use Figures/nit.png>
-Package pdftex.def Info: Figures/nit.png  used on input line 144.
-(pdftex.def)             Requested size: 167.58888pt x 167.57878pt.
-LaTeX Font Info:    Font shape `T1/opensans-TLF/bx/n' in size <16> not available
-(Font)              Font shape `T1/opensans-TLF/b/n' tried instead on input line 149.
-LaTeX Font Info:    Font shape `T1/opensans-TLF/b/n' will be
-(Font)              scaled to size 16.0pt on input line 149.
+l.67 \chapter
+             {Uvod} [2]
+Poglavlje 1..
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.3}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.159 
-       [3
-
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathrm.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathit.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathbb.enc}]
-<Figures/2Dmesh.png, id=145, 1027.84pt x 1027.84pt>
-File: Figures/2Dmesh.png Graphic file (type png)
-<use Figures/2Dmesh.png>
-Package pdftex.def Info: Figures/2Dmesh.png  used on input line 164.
-(pdftex.def)             Requested size: 198.45662pt x 198.44402pt.
-<Figures/apple.png, id=146, 1855.93375pt x 1927.2pt>
-File: Figures/apple.png Graphic file (type png)
-<use Figures/apple.png>
-Package pdftex.def Info: Figures/apple.png  used on input line 171.
-(pdftex.def)             Requested size: 198.45662pt x 206.0525pt.
- [4 <./Figures/nit.png (PNG copy)> <./Figures/2Dmesh.png (PNG copy)> <./Figures/apple.png>]
-<Figures/element.png, id=156, 149.05687pt x 137.7647pt>
-File: Figures/element.png Graphic file (type png)
-<use Figures/element.png>
-Package pdftex.def Info: Figures/element.png  used on input line 201.
-(pdftex.def)             Requested size: 167.58888pt x 154.90079pt.
-<Figures/baznaFja.png, id=158, 247.67531pt x 144.54pt>
-File: Figures/baznaFja.png Graphic file (type png)
-<use Figures/baznaFja.png>
-Package pdftex.def Info: Figures/baznaFja.png  used on input line 213.
-(pdftex.def)             Requested size: 220.50887pt x 128.6865pt.
- [5{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathcal.enc} <./Figures/element.png (PNG copy)> <./Figures/baznaFja.png (PNG copy)>]
-Underfull \hbox (badness 10000) in paragraph at lines 244--247
-
- []
-
-[6{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathsf.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathrm-bold.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathscr.enc}] [7{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathex.enc}]
-LaTeX Font Info:    Trying to load font information for TS1+stix2 on input line 375.
- (/usr/share/texlive/texmf-dist/tex/latex/stix2-type1/ts1stix2.fd
-File: ts1stix2.fd 2018/04/02 v2.0.0-latex stix2 TS1 font definitions
-) [8{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-ts1.enc}] [9] [10]
-LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 480.
- (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
-File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
-)
-<Figures/CSR.png, id=219, 293.59688pt x 252.19218pt>
-File: Figures/CSR.png Graphic file (type png)
-<use Figures/CSR.png>
-Package pdftex.def Info: Figures/CSR.png  used on input line 510.
-(pdftex.def)             Requested size: 308.71106pt x 265.17517pt.
-
-Overfull \hbox (5.16588pt too wide) in paragraph at lines 527--551
-\T1/stix2/m/n/12 Radi jed-nos-tav-nosti ova im-ple-men-ta-cija ko-risti Gauss-Seidel-ovu me-todu koja ne¢e nuºno
- []
-
-[11{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}] [12 <./Figures/csr.png (PNG copy)>] [13] [14]
-Poglavlje 3..
-[15
+l.94 \newpage
+              [3
 
 ]
+
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 95.
+
+[4{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathit.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathrm.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathcal.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathscr.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathbb.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathex.enc}] [5] [6]
+Poglavlje 2..
+<Figures/nit.png, id=180, 1027.84pt x 1027.84pt>
+File: Figures/nit.png Graphic file (type png)
+<use Figures/nit.png>
+Package pdftex.def Info: Figures/nit.png  used on input line 271.
+(pdftex.def)             Requested size: 167.58888pt x 167.57878pt.
+LaTeX Font Info:    Font shape `T1/opensans-TLF/bx/n' in size <16> not available
+(Font)              Font shape `T1/opensans-TLF/b/n' tried instead on input line 276.
+LaTeX Font Info:    Font shape `T1/opensans-TLF/b/n' will be
+(Font)              scaled to size 16.0pt on input line 276.
+[7
+
+]
+<Figures/2Dmesh.png, id=186, 1027.84pt x 1027.84pt>
+File: Figures/2Dmesh.png Graphic file (type png)
+<use Figures/2Dmesh.png>
+Package pdftex.def Info: Figures/2Dmesh.png  used on input line 291.
+(pdftex.def)             Requested size: 198.45662pt x 198.44402pt.
+<Figures/apple.png, id=187, 1855.93375pt x 1927.2pt>
+File: Figures/apple.png Graphic file (type png)
+<use Figures/apple.png>
+Package pdftex.def Info: Figures/apple.png  used on input line 298.
+(pdftex.def)             Requested size: 198.45662pt x 206.0525pt.
+ [8 <./Figures/nit.png (PNG copy)> <./Figures/2Dmesh.png (PNG copy)> <./Figures/apple.png>]
+<Figures/element.png, id=196, 149.05687pt x 137.7647pt>
+File: Figures/element.png Graphic file (type png)
+<use Figures/element.png>
+Package pdftex.def Info: Figures/element.png  used on input line 328.
+(pdftex.def)             Requested size: 167.58888pt x 154.90079pt.
+ [9 <./Figures/element.png (PNG copy)>]
+<Figures/baznaFja.png, id=203, 247.67531pt x 144.54pt>
+File: Figures/baznaFja.png Graphic file (type png)
+<use Figures/baznaFja.png>
+Package pdftex.def Info: Figures/baznaFja.png  used on input line 342.
+(pdftex.def)             Requested size: 220.50887pt x 128.6865pt.
+ [10{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathsf.enc} <./Figures/baznaFja.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 374--377
+
+ []
+
+[11{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathrm-bold.enc}] [12]
+LaTeX Font Info:    Trying to load font information for TS1+stix2 on input line 505.
+ (/usr/share/texlive/texmf-dist/tex/latex/stix2-type1/ts1stix2.fd
+File: ts1stix2.fd 2018/04/02 v2.0.0-latex stix2 TS1 font definitions
+) [13{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-ts1.enc}] [14]
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 611.
+ (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
+File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
+) [15{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}]
+<Figures/CSR.png, id=260, 293.59688pt x 252.19218pt>
+File: Figures/CSR.png Graphic file (type png)
+<use Figures/CSR.png>
+Package pdftex.def Info: Figures/CSR.png  used on input line 641.
+(pdftex.def)             Requested size: 308.71106pt x 265.17517pt.
+ [16 <./Figures/csr.png (PNG copy)>] [17] [18] [19]
+Poglavlje 3..
+<Figures/sinsinEgz.png, id=281, 369.63094pt x 358.33875pt>
+File: Figures/sinsinEgz.png Graphic file (type png)
+<use Figures/sinsinEgz.png>
+Package pdftex.def Info: Figures/sinsinEgz.png  used on input line 774.
+(pdftex.def)             Requested size: 330.76329pt x 320.65924pt.
+[20
+
+ <./Figures/sinsinEgz.png (PNG copy)>]
+<Figures/numersinsin001.png, id=290, 800.23969pt x 717.43031pt>
+File: Figures/numersinsin001.png Graphic file (type png)
+<use Figures/numersinsin001.png>
+Package pdftex.def Info: Figures/numersinsin001.png  used on input line 784.
+(pdftex.def)             Requested size: 529.21992pt x 474.47977pt.
+
+Overfull \hbox (88.2022pt too wide) in paragraph at lines 784--785
+ [][] 
+ []
+
+[21 <./Figures/numersinsin001.png (PNG copy)>]
+<Figures/numersinsin00025.png, id=296, 819.8128pt x 716.6775pt>
+File: Figures/numersinsin00025.png Graphic file (type png)
+<use Figures/numersinsin00025.png>
+Package pdftex.def Info: Figures/numersinsin00025.png  used on input line 795.
+(pdftex.def)             Requested size: 529.21992pt x 462.67447pt.
+
+Overfull \hbox (88.2022pt too wide) in paragraph at lines 795--796
+ [][] 
+ []
+
+[22 <./Figures/numersinsin00025.png (PNG copy)>]
+<Figures/numersinsin.png, id=303, 571.38469pt x 498.36188pt>
+File: Figures/numersinsin.png Graphic file (type png)
+<use Figures/numersinsin.png>
+Package pdftex.def Info: Figures/numersinsin.png  used on input line 807.
+(pdftex.def)             Requested size: 308.71106pt x 269.25589pt.
+File: Figures/2Dmesh.png Graphic file (type png)
+<use Figures/2Dmesh.png>
+Package pdftex.def Info: Figures/2Dmesh.png  used on input line 819.
+(pdftex.def)             Requested size: 154.35889pt x 154.35754pt.
+<Figures/hexmesh-modified.png, id=304, 500.87125pt x 500.87125pt>
+File: Figures/hexmesh-modified.png Graphic file (type png)
+<use Figures/hexmesh-modified.png>
+Package pdftex.def Info: Figures/hexmesh-modified.png  used on input line 825.
+(pdftex.def)             Requested size: 154.35889pt x 154.359pt.
+ [23 <./Figures/numersinsin.png (PNG copy)> <./Figures/hexmesh-modified.png>]
+<Figures/xy1xy.png, id=313, 389.20406pt x 175.40532pt>
+File: Figures/xy1xy.png Graphic file (type png)
+<use Figures/xy1xy.png>
+Package pdftex.def Info: Figures/xy1xy.png  used on input line 841.
+(pdftex.def)             Requested size: 352.81552pt x 159.01152pt.
+<Figures/numerxy1xy.png, id=314, 847.66687pt x 718.18312pt>
+File: Figures/numerxy1xy.png Graphic file (type png)
+<use Figures/numerxy1xy.png>
+Package pdftex.def Info: Figures/numerxy1xy.png  used on input line 849.
+(pdftex.def)             Requested size: 308.71106pt x 261.54837pt.
+ [24 <./Figures/xy1xy.png (PNG copy)> <./Figures/numerxy1xy.png (PNG copy)>]
 Poglavlje 4..
-(./zavrsni_rad.bbl [16
+(./zavrsni_rad.bbl [25
 
 ]
 
 LaTeX Warning: Empty `thebibliography' environment on input line 25.
 
-) [17
+) [26
 
-] [18
+] [27
 
-] [19
+] [28
 
 ]
 pdfTeX warning (ext4): destination with the same identifier (name{chapter.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.657 \chapter{The Code}
+l.898 \chapter{The Code}
                         
 Privitak A.
-[20
+[29
 
 
 ] (./zavrsni_rad.aux)
@@ -920,6 +982,7 @@ atveryend-ltx.sty    2020/08/19 v1.0a Emulation of the original atveryend packag
 with kernel methods
 rerunfilecheck.sty    2022-07-10 v1.10 Rerun checks for auxiliary files (HO)
 uniquecounter.sty    2019/12/15 v1.4 Provide unlimited unique counter (HO)
+   float.sty    2001/11/08 v1.3d Float enhancements (AL)
 blindtext.sty    2012/01/06 V2.0 blindtext-Package
   xspace.sty    2014/10/28 v1.13 Space after command names (DPC,MH)
 subcaption.sty    2023/07/28 v1.6b Sub-captions (AR)
@@ -957,25 +1020,33 @@ Figures/baznaFja.png
 ts1stix2.fd    2018/04/02 v2.0.0-latex stix2 TS1 font definitions
   t1cmtt.fd    2023/04/13 v2.5m Standard LaTeX font definitions
 Figures/CSR.png
+Figures/sinsinEgz.png
+Figures/numersinsin001.png
+Figures/numersinsin00025.png
+Figures/numersinsin.png
+Figures/2Dmesh.png
+Figures/hexmesh-modified.png
+Figures/xy1xy.png
+Figures/numerxy1xy.png
 zavrsni_rad.bbl
  ***********
 
 Package rerunfilecheck Info: File `zavrsni_rad.out' has not changed.
-(rerunfilecheck)             Checksum: 947022E39BB46A8762AA9F956D217C4E;2301.
+(rerunfilecheck)             Checksum: 04EB75CDCE8583537C4634A25B61C48A;3044.
  ) 
 Here is how much of TeX's memory you used:
- 18217 strings out of 474222
- 283636 string characters out of 5748734
- 1934975 words of memory out of 5000000
- 40098 multiletter control sequences out of 15000+600000
- 682308 words of font info for 158 fonts, out of 8000000 for 9000
+ 18377 strings out of 474222
+ 286845 string characters out of 5748734
+ 1932975 words of memory out of 5000000
+ 40230 multiletter control sequences out of 15000+600000
+ 710748 words of font info for 162 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 87i,17n,131p,505b,745s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 87i,17n,131p,505b,747s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/ascender/opensans/OpenSans-Bold.pfb></usr/share/texlive/texmf-dist/fonts/type1/ascender/opensans/OpenSans-Regular.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/stix2-type1/STIX2Math.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/stix2-type1/STIX2Text-Bold.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/stix2-type1/STIX2Text-BoldItalic.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/stix2-type1/STIX2Text-Italic.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/stix2-type1/STIX2Text-Regular.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on zavrsni_rad.pdf (23 pages, 3541416 bytes).
+Output written on zavrsni_rad.pdf (32 pages, 5173226 bytes).
 PDF statistics:
- 342 PDF objects out of 1000 (max. 8388607)
- 275 compressed objects within 3 object streams
- 58 named destinations out of 1000 (max. 500000)
- 195 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 427 PDF objects out of 1000 (max. 8388607)
+ 342 compressed objects within 4 object streams
+ 82 named destinations out of 1000 (max. 500000)
+ 254 words of extra memory for PDF output out of 10000 (max. 10000000)
 

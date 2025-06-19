@@ -24,6 +24,7 @@ void printTriple(tuple<ld, ld, ld> t) {
     << get<2>(t)
     << ")\n";
 }
+
 struct TupleHash3ull {
   size_t operator()(const tuple<ull, ull, ull>& t) const {
     size_t h1 = hash<ull>{}(get<0>(t));
@@ -49,6 +50,7 @@ class Mesh2D {
 public:
   ull numberOfNodes;
   ull boundaryNodeCutOff;
+  ull numOfElementsToGraph;
   ld h;
   vector<tuple<ull, ull, ull>> elements;
   unordered_map<ull, tuple<ld, ld>> getNodeCoordinates;
@@ -110,8 +112,9 @@ public:
     }
     unordered_map<ull, bool> isBoundary;
     for (auto[node, _] : domainMap) {
-      if (node % (N + 1) == N)
+      if (node % (N + 1) == N) {
         continue;
+      }
       if (node > N) {
         //up
         if (node % (2 * (N + 1)) <= N) {
@@ -213,6 +216,8 @@ public:
       getNodeIndex[key] = substitution[val];
     }
     //elements and neighbours
+    // vector<tuple<ull, ull, ull>> newElements;
+    numOfElementsToGraph = 0;
     for (ull i = 0; i < elements.size(); i++) {
       get<0>(elements[i]) = substitution[get<0>(elements[i])]; 
       get<1>(elements[i]) = substitution[get<1>(elements[i])]; 
@@ -220,31 +225,20 @@ public:
       ull e0 = get<0>(elements[i]);
       ull e1 = get<1>(elements[i]);
       ull e2 = get<2>(elements[i]);
-      if (e0 < boundaryNodeCutOff) {
-        if (e1 < boundaryNodeCutOff) {
-          neighbours[e0].insert(e1);
-        }
-        if (e2 < boundaryNodeCutOff) {
-          neighbours[e0].insert(e2);
-        } 
+      
+      if (!(e0 < boundaryNodeCutOff && e1 < boundaryNodeCutOff && e2 < boundaryNodeCutOff)) {
+        continue;
       }
-      if (e1 < boundaryNodeCutOff) {
-        if (e0 < boundaryNodeCutOff) {
-          neighbours[e1].insert(e0);
-        }
-        if (e2 < boundaryNodeCutOff) {
-          neighbours[e1].insert(e2);
-        }
-      }
-      if (e2 < boundaryNodeCutOff) {
-        if (e0 < boundaryNodeCutOff) {
-          neighbours[e2].insert(e0);
-        }
-        if (e1 < boundaryNodeCutOff) {
-          neighbours[e2].insert(e1);
-        }
-      }
+      numOfElementsToGraph++; 
+      // newElements.push_back({e0,e1,e2});
+      neighbours[e0].insert(e1);
+      neighbours[e0].insert(e2);
+      neighbours[e1].insert(e0);
+      neighbours[e1].insert(e2);
+      neighbours[e2].insert(e0);
+      neighbours[e2].insert(e1);
     }
+    // std::swap(elements, newElements);
   }
 
   void checkMesh() {
@@ -269,6 +263,7 @@ public:
       }
     }
   }
+  
   void print() {
     cout << "Number of nodes: " << numberOfNodes << "\n";
     cout << "boundaryNodeCutOff: " << boundaryNodeCutOff << "\n";

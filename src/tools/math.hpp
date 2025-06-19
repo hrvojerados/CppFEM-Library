@@ -1,9 +1,12 @@
 //#include <bits/stdc++.h>
 #pragma once
 
+#include <functional>
+#include <stdexcept>
 #include <unordered_map>
 #include <set>
 #include <algorithm>
+#include <cmath>
 #include <iostream>
 #include <cstdio>
 #include <stdexcept>
@@ -99,11 +102,11 @@ public:
   }
 
   void print() {
-    printf("v = (");
+    cerr << "v = (";
     for (u i = 0; i < size; i++) {
-      printf("%Lf, ", V[i]);
+      cerr << V[i] << ", ";
     }
-    printf(")\n");
+    cerr << ")\n";
   }
 
 };
@@ -172,25 +175,6 @@ public:
           C[j] = i;
         }
       }
-      // for (ull i = 0; i < numOfRows; i++) {
-      //   sort(neigbours[i].begin(), neigbours[i].end());
-      //   bool isIInserted = false;
-      //   ull j = R[i];
-      //   for (
-      //       u it = 0;
-      //       j < R[i + 1] && it < neigbours[i].size();
-      //       j++, it++) {
-      //     if (neigbours[i][it] > i && !isIInserted) {
-      //       C[j] = i;
-      //       isIInserted = true;
-      //       j++;
-      //     }
-      //     C[j] = neigbours[i][it];
-      //   }
-      //   if (!isIInserted) {
-      //     C[j] = i;
-      //   } 
-      // }
   }
 
   inline ld get(ull i, ull j) {
@@ -222,29 +206,29 @@ public:
   }
 
   inline void print() {
-    printf("A:\n");
+    cerr << "A:\n";
     for (ull i = 0; i < numOfElements; i++) {
-      printf("%Lf ", A[i]);
+      cerr << A[i] << " ";
     }
-    printf("\n");
+    cerr << "\n";
 
-    printf("C:\n");
+    cerr << "C:\n";
     for (ull i = 0; i < numOfElements; i++) {
-      printf("%llu ", C[i]);
+      cerr << C[i] << " ";
     }
-    printf("\n");
+    cerr << "\n";
 
-    printf("R:\n");
+    cerr << "R:\n";
     for (ull i = 0; i < numOfRows; i++) {
-      printf("%llu ", R[i]);
+      cerr << R[i] << " ";
     }
-    printf("\n");
+    cerr << "\n";
 
     for (ull i = 0; i < numOfRows; i++) {
       for (ull j = 0; j < numOfRows; j++) {
-        printf("%Lf ", get(i, j));
+        cerr << get(i, j) << " ";
       }
-      printf("\n");
+      cerr << "\n";
     }
   }
 
@@ -254,6 +238,13 @@ public:
     delete[] R;
   }
 };
+
+pair<ld, ld> grad(ld x, ld y, function<ld(ld, ld)> f, ld eps) {
+  pair<ld, ld> result;
+  result.first = (f(x + eps, y) - f(x, y)) / eps;
+  result.second = (f(x, y + eps) - f(x, y)) / eps;
+  return result;
+} 
 
 template <u meshBranchFactor>
 void solveGaussSeidel(
@@ -266,8 +257,8 @@ void solveGaussSeidel(
     cerr << M.numOfRows << " " << n << "\n";
     throw invalid_argument("dimension error in Gauss-Seidel solver");
   }
-  for (u i = 0; i < n; i++) x[i] = 1;
-  
+  for (u i = 0; i < n; i++) x[i] = 0;
+
   for (u k = 1; k <= numOfIterations; k++) {
     for (u i = 0; i < M.numOfRows; i++) {
       ld sumOfLessThan_i = 0;
@@ -291,3 +282,50 @@ void solveGaussSeidel(
     }
   }
 }
+template <u meshBranchFactor>
+void solveCG(
+    Vector &x,
+    SparseMatrix<meshBranchFactor> &M,
+    Vector &b,
+    u numOfIterations) 
+{
+  ull n = b.size;
+  if (M.numOfRows != n) {
+    cerr << M.numOfRows << " " << n << "\n";
+    throw invalid_argument("dimension error in CG solver");
+  }
+  Vector r(n), p(n), Ap(n);
+  for (ull i = 0; i < n; ++i) 
+    x[i] = 0;
+  for (ull i = 0; i < n; ++i) 
+    r[i] = b[i];
+  for (ull i = 0; i < n; ++i) 
+    p[i] = r[i];
+  long double rsold = dot(r, r);
+  for (ull k = 0; k < numOfIterations; k++) {
+    for (ull i = 0; i < n; ++i) {
+      ld sum = 0;
+      for (ull j = M.R[i]; j < M.R[i+1]; j++)
+        sum += M.A[j] * p[M.C[j]];
+      Ap[i] = sum;
+    }
+    ld pAp = dot(p, Ap);
+    if (pAp == 0) break; 
+    ld alpha = rsold / pAp;
+    for (ull i = 0; i < n; ++i) {
+      x[i] += alpha * p[i];
+      r[i] -= alpha * Ap[i];
+    }
+    ld rsnew = dot(r, r);
+    if (sqrt(rsnew) < 1e-10L) 
+      break;
+
+    ld beta = rsnew / rsold;
+    for (ull i = 0; i < n; ++i) {
+      p[i] = r[i] + beta * p[i];
+    }
+    rsold = rsnew;
+  }
+}
+
+

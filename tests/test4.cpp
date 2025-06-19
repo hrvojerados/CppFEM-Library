@@ -7,10 +7,10 @@ using namespace std;
 
 int main() {
   auto inDomain =  [&] (ld x, ld y) {
-    return (x >= 0) && (x <= 1) && (y >= 0) && (y <= 1);
+    return (x >= 0) && (y >= 0) && (x + y <= 1);
   };
   auto f = [&] (ld x, ld y) {
-    return 2 * (M_PI * M_PI) * sin(M_PI * x) * sin(M_PI * y);
+    return 2 * (x + y);
   };
   ld M[2][2];
   M[0][0] = 1;
@@ -18,18 +18,20 @@ int main() {
   M[1][0] = 0;
   M[1][1] = 1;
   Mesh2D mesh;
+  ull numOfElementsToGraph;
   Vector sol = solve(
       inDomain,
       {0, 1},
       {1, 0},
-      0.01,
+      0.005,
       M,
       {0, 0},
       0.0,
       f,
-      10000,
-      mesh);
-  cout << sol.size << " " << mesh.numberOfNodes << "\n";
+      1000,
+      mesh,
+      numOfElementsToGraph);
+  cout << sol.size << " " << numOfElementsToGraph << "\n";
   for (ull i = 0; i < sol.size; i++) {
     cout << get<0>(mesh.getNodeCoordinates[i]) 
       << " "
@@ -39,7 +41,9 @@ int main() {
       << "\n";
   } 
   for (auto [n0, n1, n2] : mesh.elements) {
-    cout << n0 << " " << n1 << " " << n2 << "\n";
+    if (n0 < mesh.boundaryNodeCutOff && n1 < mesh.boundaryNodeCutOff && n2 < mesh.boundaryNodeCutOff) {
+      cout << n0 << " " << n1 << " " << n2 << "\n";
+    }
   }
 
 }
