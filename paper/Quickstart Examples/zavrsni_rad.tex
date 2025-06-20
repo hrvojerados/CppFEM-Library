@@ -5,6 +5,7 @@
 \usepackage{float}
 \usepackage{blindtext}
 \usepackage{subcaption}
+\usepackage{hyperref}
 \newtheorem{teorem}{Teorem}
 
 %--- PODACI O RADU / THESIS INFORMATION ----------------------------------------
@@ -60,8 +61,9 @@
 
 
 % Sadržaj se automatski generira / Table of contents is automatically generated
+{\large
 \tableofcontents
-
+}
 
 %--- UVOD / INTRODUCTION -------------------------------------------------------
 \chapter{Uvod}
@@ -89,7 +91,7 @@ jednadžbama s konstantnim koeficijentima i rubnim uvjetom odnosno
 traženjem njihova rješenja koristeći Galjorkinovu metodu
 konačnih elemenata. Cilj rada je pokušati  napraviti
 C++ biblioteku koja služi kao efikasan, ali iznad svega
-jednostavan alat za rješavanje PDJ-ova.
+jednostavan alat za rješavanje PDJ-ova. 
 % Neki od radova koje ćemo citirati su \cite{6248073,6247753,ghiglia_pritt_phase_unwrapping,hartley2003multiple,4250461,123DCatch}.
 \newpage
 \subsection{Definicije i primjeri}
@@ -296,7 +298,7 @@ jedan elemente) ću u ovom radu zvati čvorovima.
   \begin{subfigure}[b]{0.45\linewidth}
     \centering
     \includegraphics[width=\linewidth]{Figures/apple.png}
-    \caption{Složeni 3D mesh jabuke}
+    \caption{Složeni 3D mesh jabuke.\href{https://pixabay.com/vectors/apple-fruit-green-apple-nature-1590131/}{Slika}}
     \label{jabuka}
   \end{subfigure}
   \caption{Primjeri mesheva}
@@ -327,7 +329,7 @@ slici.
 	\centering
 	\includegraphics[width=0.38\linewidth]{Figures/element.png}
 	\caption{najdulja stranica trokuta $h_k$ i promjer
-  upisane kružnice $\rho_k$}
+  upisane kružnice $\rho_k$. Slika je preuzeta iz \cite{Quarteroni}}
 \end{figure}
 
 \newpage
@@ -340,7 +342,7 @@ iznosi $1$ iznad jednog vrha, a $0$ iznad ostalih \ref{baznaFja}
 \begin{figure}[htb]
 	\centering
 	\includegraphics[width=0.5\linewidth]{Figures/baznaFja.png}
-	\caption{bazna fukcija za neki čvor $j$}
+  \caption{Bazna fukcija za neki čvor $j$. Slika je preuzeta iz \cite{Quarteroni}}
 	\label{baznaFja}
 \end{figure}
 Ovo ćemo napraviti za svaki čvor. 
@@ -639,7 +641,7 @@ inline void inc(ull i, ull j, ld val) {
 \begin{figure}[htb]
 	\centering
 	\includegraphics[width=0.7\linewidth]{Figures/CSR.png}
-	\caption{grafički prikaz CSR reprezentacije matrice $A$}
+  \caption{Grafički prikaz CSR reprezentacije matrice $A$. Slika je preuzeta iz \cite{Quarteroni}}
 	\label{CSR}
 \end{figure}
 \newpage
@@ -760,14 +762,14 @@ jednostavne python skripte za crtanje grafova.
 Testiranje funkcionalnosti sam radio na jednadžbi 
 potencijala \ref{potencijalPDJ}. 
 Egzaktna rješenja sam dobio tako da bih odabrao neko egzaktno rješenje i 
-potom bih ga uvrstio u jednadžbu i vidio kako glasi funkcija pobude ($f(x,y)$).
+potom bih ga uvrstio u jednadžbu i vidio kako glasi funkcija pobude $f(x,y)$.
 Za početak predstavljam rezultate sljedećeg problema:
 \begin{equation}
-  \Delta u = - 2 * \pi^2 \sin{(\pi x)}\sin{(\pi y)}, \quad (x,y) \in \Omega,
+  \Delta u = - 2  \pi^2 \sin{(\pi x)}\sin{(\pi y)}, \quad (x,y) \in \Omega,
   \, \Omega = [0,1] \times [0,1], \, u |_{ \partial \Omega} = 0
 \end{equation}
-Egzaktno rješenje glasi $u(x,y) = \sin{(\pi x)}\sin{(\pi y)}$, također 
-dajem i grafički prikaz \ref{sinsinEgz}
+Egzaktno rješenje glasi $u(x,y) = \sin{(\pi x)}\sin{(\pi y)}$. 
+Grafički prikaz: \ref{sinsinEgz}
 \bigskip
 \begin{figure}[H]
 	\centering
@@ -777,7 +779,7 @@ dajem i grafički prikaz \ref{sinsinEgz}
 \end{figure}
 
 \newpage
-Za elemente reda veličine $0.01$ moja C++ implementacija daje sljedeći 
+Za elemente reda veličine $0.01$ (preciznost) moja C++ implementacija daje sljedeći 
 rezultat \ref{numerSinSin001}.
 \begin{figure}[H]
 	\centering
@@ -785,10 +787,10 @@ rezultat \ref{numerSinSin001}.
 	\caption{preciznost od $0.01$}
   \label{numerSinSin001}
 \end{figure}
-\newpage
 Vrlo se lako uoče nepravilnosti na pravcu $x=0$, 
 kao i nešto veći maksimum ($1.4 > 1$)
-Dodatnim usitnjavanjem mesha (red veličine $0.0025$
+\newpage
+Dodatnim usitnjavanjem mesha (red veličine $0.0025$)
 dobije se sljedeće:
 \begin{figure}[H]
 	\centering
@@ -796,19 +798,25 @@ dobije se sljedeće:
 	\caption{preciznost od $0.00025$}
   \label{numerSinSin00025}
 \end{figure}
+Primijećujem kako se podignuti dio aproksimacije spustio dolje.
+Nažalost, ovo nije moguće raditi u nedogled zbog potrebne 
+računalne moći. Naime, usitnjavanjem mesha dolazi do više čvorova, a 
+svaki čvor odgovara novoj nepoznanici koju treba riješiti u sustavu. 
+
 \newpage
 Raznim eksperimentiranjem i obzervacijama zaključio sam da je problem
-u meshu. Naime, moje implementacije koje su bile izrađene isključivo 
-za pravokutne domene (te su bile napisane u pythonu). Koriste mesh 
+u meshu. Naime, moje prve implementacije u pythonu koje su bile izrađene isključivo 
+za pravokutne domene odnosno koriste mesh 
 koji je bolje prilagođen obliku pravokutnika daju sljedeći rezultat:
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{Figures/numersinsin.png}
+	\includegraphics[width=1.15\linewidth]{Figures/numersinsin.png}
 	\caption{}
   \label{numerSinSin}
 \end{figure}
-Što je dosta dobra aproksimacija.
+Ovo je očito dosta dobra aproksimacija.
+\newpage
 Ako usporedimo mesheve koji se koriste u ovim implementacijama,
 problem postaje jasniji.
 
@@ -831,7 +839,7 @@ kojem se aproksimacija čudno ponaša.
 \\
 Možemo pokušati riješiti pokuju PDJ i na drugačijim domenama.
 \begin{equation}
-  \Delta u = 2(x +y),\, 0 \leq x, \, 0 \leq y, \, x + y \leq 1 
+  \Delta u =- 2(x +y),\, 0 \leq x, \, 0 \leq y, \, x + y \leq 1 
   \, u |_{ \partial \Omega} = 0
 \end{equation}
 Egzaktno rješenje glasi $u(x,y) = xy(1- x - y)$, također 
@@ -842,18 +850,52 @@ dajem i grafički prikaz \ref{xy1xy}
 	\caption{Izrađeno u geogebri}
   \label{xy1xy}
 \end{figure}
+\newpage
 Numeričko rješenje će se opet ponašati loše na pravcu $x=0$.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{Figures/numerxy1xy.png}
+	\includegraphics[width=1.2\linewidth]{Figures/numerxy1xy.png}
 	\caption{preciznost od $0.01$}
   \label{}
 \end{figure}
+Ovaj problem može biti jedino riješen implementacijom 
+kvalitetnijih generatora mesha. Moguće je također dodati i 
+mogućnost unosa mesha koji su generirani od strane posebnih
+alata poput Blendera, ali to nije bio cilj ovog rada. 
+Cilj je bio da se mesh zadaje preko implicitnih funkcija,
+a taj je problem, kako je već opisano u poglavlju o
+meshevima izvan raspona ovog rada.
 \newpage
 
 %--- ZAKLJUČAK / CONCLUSION ----------------------------------------------------
 \chapter{Zaključak}
+Rezultatima je pokazano da je osim gustoće samog mesha,
+izuzetno bitna i njegova struktura. Na primjeru jednadžbe 
+potencijala s Dirichletovim uvjetima i pravokutnom domenom 
+je viđeno da mesh, koji je bolje prilagođen pravokutnoj domeni, 
+daje puno bolje rezultate nego onaj koji ima "cik cak" uzorak 
+uz neke rubove.
+\\
+Analiza kroz više testnih primjera pokazala je da je ključni izazov konstrukcija 
+prikladnog mesha koji može dovoljno dobro aproksimirati domenu,
+a istovremeno biti računalno učinkovit.
+Iako je moguće unaprijediti rezultate korištenjem
+sofisticiranijih alata za generiranje mesha (npr. Blender),
+fokus ovog rada bio je na izradi jednostavnog sučelja koje 
+se služi implicitnom definicijom domene, slično kako bi 
+ju netko definirao kada bi riješavao PDJ na papiru.
+\\ 
+Budući rad bi se mogao fokusirati više na izradu samog mesha
+s ciljem da se ostvare bolje aproksimacije. To bi se moglo 
+postići tako da se obrati puno veća pažnja na sam rub mesha 
+pri smišljanju heuristike za njegovo generiranje
+jer se on iz dobivenih rezultata čini važnijim. 
+Također valja spomenuti i implementaciju adaptivnosti mesha 
+što je metoda u kojoj se na svakom elementu procjenjuje greška 
+na temelju koje se odlučuje treba li se mesh usitniti na 
+dijelovima gdje je ta procijena veća.
+
 \label{pog:zakljucak}
 
 
@@ -870,23 +912,42 @@ Numeričko rješenje će se opet ponašati loše na pravcu $x=0$.
 
 % Sažetak na hrvatskom
 \begin{sazetak}
-	Unesite sažetak na hrvatskom.
-
+Galjorkinova metoda konačnih elemenata se često koristi
+u numeričkom rješavanju (parcijalnih) diferencijalnih
+jednadžbi te time ima veliki značaj u modeliranju i
+rješavanju inženjerskih problema. Njezina implementacija
+se bazira na raznim metodama iz numeričke matematike kao što
+su rješavanje linearnih sustava i numeričko integriranje.
+Složenost implementacije proizlazi i iz parcitiranja domene
+na kojoj se problem rješava, a dodatna složenost je u optimizaciji
+pri čemu se može koristiti višedretveno programiranje.
+U ovom radu je implementirana Galjorkinova metoda te su
+analizirate njene performanse na konkretnim primjerima.
 \end{sazetak}
 
 \begin{kljucnerijeci}
-	prva ključna riječ; druga ključna riječ; treća ključna riječ
+  diferencijalna jednadžba, parcijalna derivacija, jednadžba potencijala, FEM
 \end{kljucnerijeci}
 
 
 % Abstract in English
 \begin{abstract}
 	Enter the abstract in English.
-
+The Galerkin finite element method is frequently
+used in the numerical solution of (partial) differential
+equations and thus plays an important role in modeling
+and solving engineering problems.
+Its implementation relies on various methods from numerical mathematics,
+such as solving linear systems and numerical integration.
+The complexity of the implementation also arises from the partitioning
+of the domain on which the problem is solved, with additional
+complexity in optimization, where multithreaded programming can be used.
+In this paper, the Galerkin method was implemented and its
+performance was analyzed on concrete examples.
 \end{abstract}
 
 \begin{keywords}
-	the first keyword; the second keyword; the third keyword
+  differential equation, partial derivative, potential equation, FEM
 \end{keywords}
 
 
@@ -896,7 +957,9 @@ Numeričko rješenje će se opet ponašati loše na pravcu $x=0$.
 \backmatter
 
 \chapter{The Code}
+\begin{itemize}
+ \item \href{https://github.com/hrvojerados/CppFEM-Library}{C++ implementacija}
 
-
-
+ \item \href{https://github.com/hrvojerados/FiniteElementMethods}{Python implementacija}
+\end{itemize}
 \end{document}
