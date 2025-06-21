@@ -52,7 +52,15 @@
 
 \begin{zahvale}
 	% Ovdje upišite zahvale / Write in the acknowledgment
-	Hvala na kavi...
+Htio bih se zahvaliti svom mentoru,
+prof. dr. sc. Tomislavu Buriću, 
+na pomoći pri izradi ovog rada,
+prof. dr. sc. Dariu Bojancu, koji me prvi upoznao
+s temom konačnih elemenata, te mom profesoru iz fizike,
+Ivici Marinoviću, koji je imao najznačajniji 
+utjecaj na moje matematičke i analitičke sposobnosti,
+i samim time dao dosad najveći
+doprinos meni osobno tijekom moga obrazovanja.
 \end{zahvale}
 
 
@@ -74,7 +82,7 @@ važnost se obično prvo primijeti u fizici gdje se one vrlo
 intuitivno pojavljuju u područjima kao što su klasična mehanika,
 elektromagnetizam, termodinamika pa i malo manje intuitivno u
 područjima kao što su kvantna mehanika. Diferencijalne jednadžbe
-imaju velik utjecaj i na područja izvan fizike.
+imaju veliku uporabu i u područjima izvan fizike.
 S njima se mogu modelirati izmjene populacija, širenje zaraza,
 oblikovanje raznih genetskih obilježja (uzoraka),
 širenje signala u neuronima, procesiranju slika, raznim
@@ -100,7 +108,7 @@ Parcijalne diferencijalne jednadžbe su diferencijalne
 jednadžbe koje sadrže derivacije nepoznate funkcije s
 obzirom na više varijabli. Označimo s $u$ nepoznatu funkciju
 koju želimo odrediti s $d + 1$ nepoznatih varijabli 
-$\textbf{x} = (x_1, \dots, x_d)^T, t$. Općenita parcijalna diferencijalna 
+$\textbf{x} = (x_1, \dots, x_d)^T$ i $t$. Općenita parcijalna diferencijalna 
 jednadžba (PDJ) poprima oblik:
 $$\mathcal{P}(u, g) = F(\textbf{x}, t, u,
 \frac{\partial u}{\partial t},
@@ -120,23 +128,24 @@ i o svojim parcijalnim derivacijama, kažemo da je
 PDJ  linearna.
 \bigskip
 \\ 
-Linearne PDJ su jako česte u praksi kao primjer navodim 
-\textit{transportnu jednadžbu}:
+Linearne PDJ su jako česte u praksi, stoga ću u nastavku 
+navesti nekoliko primjera.\\
+\textit{Transportna jednadžba}:
 $$\frac{\partial u}{\partial t} + \nabla \cdot (\beta u) = 0$$
 $\nabla \cdot v$ označava operator divergencije odnosno 
 $\nabla \cdot v = \sum_{i=1}^d \frac{\partial v}{\partial x_i}$
 \bigskip 
 \\
-PDJ kojim ću se u ovom radu baviti je \textit{jednadžba potencijala}.
+PDJ kojom ću se u ovom radu većinom
+baviti je \textit{jednadžba potencijala} koja
+se također može koristiti za opis vertikalnog
+pomaka elastične membrane. 
 \begin{equation}
   \label{potencijalPDJ}
 - \Delta u = - f 
 \end{equation}
-\ref{potencijalPDJ} se također
-može koristiti za opis vertikalnog pomaka elastične membrane. 
-\bigskip
 \\ 
-\textit{Jednadžba vođenja topline}
+U praksi je od iznimne važnosti i \textit{jednadžba vođenja topline}
 \begin{equation}
   \frac{\partial u}{\partial t} - \Delta u = f
 \end{equation}
@@ -151,11 +160,16 @@ $\Delta u = \sum_{i = 1}^d \frac{\partial^2 u}{\partial x_i ^2}$
   \frac{\partial ^2 u}{\partial^2 t} - \Delta u = 0
 \end{equation}
 
-Iako nisu glavni predmet proučavanja ovog rada, navodim 
+Iako im u ovom radu nisam posvetio
+dovoljno veliku pažnju kakvu 
+inače zaslužuju, navodim 
 i neke nelinearne PDJ.
 Jedna od njih se zove \textit{Burgersova jednadžba}.
 $$\frac{\partial u}{\partial t} +
 u \frac{\partial u}{\partial x_i}$$
+Burgersova jednadžba je korištena u modelima fluida, 
+nelinearnoj akustici te čak u modeliranju toka prometa. 
+\\
 Pred kraj dajem proizvoljnu nelinearnu PDJ. 
 $$\Big(\frac{\partial^2 u}{\partial x_1 ^2}\Big)^2 +
 \Big(\frac{\partial^2 u}{\partial x_2 ^2}\Big)^2 = f$$
@@ -164,7 +178,11 @@ $$\Big(\frac{\partial^2 u}{\partial x_1 ^2}\Big)^2 +
 Općenito nije moguće pronaći rješenje od $\mathcal{P}(u,g)$ 
 u eksplicitnom obliku. Neke stardardne metode kao što 
 su separacija varijabli su veoma ograničene po tom pitanju.
-Čak kada je poznat
+Čak kada je poznato opće rješenje ne mora biti moguće pronaći 
+partikularno, što dovodi do nužnosti postavljanja takozvanih 
+rubnih uvjeta na  ove jednadžbe. Rubni uvjeti su matematički izrazi 
+koji zahtijevaju da se nepoznata funkcija specifično ponaša
+na rubu njezine domene.
 \bigskip
 \\ 
 Mogućnost odabira proizvoljnih rubnih uvjeta značajno 
@@ -177,23 +195,7 @@ nedostaju moćni alati za njihovo rješavanje.
 Iz gornje rasprave slijedi da je bitno imati 
 razvijene numeričke metode za rješavanje PDJ-ova koje 
 ne rješavaju danu parcijalnu jednadžbu, nego daju dovoljno 
-dobru aproksimaciju njezina rješenja.općenito rješenje neke PDJ, nije garantirano 
-da je moguće pronaći partikularno rješenje, stoga 
-se zadaju tkz. rubni uvjeti na $u$ ili njezine derivacije na 
-rubu domene $\Omega$ s koje se funkcija $u$ preslikava.
-\bigskip
-\\ 
-Mogućnost odabira proizvoljnih rubnih uvjeta značajno 
-podiže složenost ovog problema. Iz perspektive matematičke 
-teorije, analiza PDJ-ova je uglavnom ograničena na  
-postojanje, jedinstvenost i regularnost rješenja, no 
-nedostaju moćni alati za njihovo rješavanje. 
-\bigskip
-\\ 
-Iz gornje rasprave slijedi da je bitno imati 
-razvijene numeričke metode za rješavanje PDJ-ova koje 
-ne rješavaju danu parcijalnu jednadžbu, nego daju dovoljno 
-dobru aproksimaciju njezina rješenja.
+dobru aproksimaciju njezina rješenja. 
 \newpage 
 
 \subsection{Klasifikacija parcijalnih diferencijalnih jednadžbi}
@@ -335,7 +337,7 @@ slici.
 \newpage
 \subsection{Bazne funkcije}
 
-Nakon uspješno generiranog mesha je potrebno definirati
+Nakon uspješno generiranog mesha potrebno je definirati
 bazne funkcije. Bazne fukcije ćemo definirati tako da
 na svakom elementu definiramo polinom prvog stupnja koji
 iznosi $1$ iznad jednog vrha, a $0$ iznad ostalih \ref{baznaFja}
@@ -396,10 +398,10 @@ Lipschitz neprekinuta, a $u,v \in H^1(\Omega)$
 Vratimo se sada na \ref{PDJ}.
 Cilj nam je dobiti njezinu takozvanu slabu formulaciju.
 Prvo ćemo reformulirati PDJ. Primijetimo da vrijedi:
-$$\nabla \cdot (A \nabla u) = 
-  A \frac{\partial^2 u}{\partial x^2}
-	+ B \frac{\partial^2 u}{\partial x \partial y}
-	+ C \frac{\partial^2 u}{\partial y^2}
+$$\nabla \cdot (M \nabla u) = 
+  C_0 \frac{\partial^2 u}{\partial x^2}
+	+ C_1 \frac{\partial^2 u}{\partial x \partial y}
+	+ C_2 \frac{\partial^2 u}{\partial y^2}
 $$
 Gdje:
 $$M = 
@@ -420,16 +422,16 @@ $$a =
   C_4
 \end{pmatrix}
 $$
-Time dobivamo sljedeću jednadžbu:
+Uvrštavanjem se dobije sljedeća jednadžba:
 \begin{equation}
   \label{vektorVerzija}
 \nabla \cdot (M \nabla u)  + \nabla u \cdot a + C_5u = f(x,y)
 \end{equation}
-Do slabe formulacije dolazimo tako da obje strane \ref{vektorVerzija} 
+Do tkz. slabe formulacije dolazimo tako da obje strane \ref{vektorVerzija} 
 pomnožimo
 s baznom funkcijom $\varphi_i$, integriramo po $\Omega$
-i onda primijenimo  \ref{tm1} 
-imamo:
+i onda primijenimo  \ref{tm1}.\\ 
+Imamo:
 \begin{equation}
   \int_{\Omega}\nabla \cdot (M \nabla u) \varphi_i \, d\Omega  + 
   \int_{\Omega} \nabla u \cdot a\varphi_i \, d\Omega  + C_5\int_{\Omega}u\varphi_i\,d\Omega  =
@@ -444,7 +446,7 @@ dobije se:
   \int_{\Omega} \nabla u \cdot a\varphi_i \, d\Omega  + C_5\int_{\Omega}u\varphi_i\,d\Omega  =
   \int_{\Omega}f(x,y)\varphi_i \, d\Omega 
 \end{equation}
-s obzirom na to da su funkcije $\varphi_i$ po definiciji
+S obzirom na to da su funkcije $\varphi_i$ po definiciji
 na rubu jednake $0$, jednadžba 
 \ref{kobasica} se 
 svede na:
@@ -455,10 +457,14 @@ svede na:
   \int_{\Omega}f(x,y)\varphi_i \, d\Omega 
 \end{equation}
 Primijetimo kako u ovakvom obliku funkcija $f(x,y)$ 
-na sebi ima puno slabije restrikcije (Sjetimo se \ref{uvjetNaf})
+na sebi ima puno slabije restrikcije (Sjetimo se \ref{uvjetNaf}).
+Odavde ujedno i naziv "slaba formulacija". Primijetimo također 
+da je ovakva formulacija ekvivalentna jakoj formulaciji 
+kada bismo derivacije u jakoj formulaciji shvatili kao 
+derivacije distribucija.
 \bigskip
 \\
-Sada interpolacijom:
+Sada interpolacijom nepoznate funkcije $u$:
 $$u = \sum_{j=0}^N \alpha_j \varphi_j$$
 dobivamo sustav:
 \begin{equation}
@@ -483,7 +489,7 @@ onda bismo morali napraviti sljedeću
 supstituciju:
 $$u = \overset{\circ}u + R$$
 Sustav \ref{linSustav}
-postaje:
+onda postaje:
 $$Ax = b - r$$
 gdje je:
 $$r_i = - \int_{\Omega}(M\nabla R) \nabla \varphi_i \, d \Omega +
@@ -492,7 +498,6 @@ C_5 \int_{\Omega} R \varphi_i\, d\Omega
 $$
 Time smo problem rješavanja PDJ sveli na problem
 rješavanja linearnog sustava.
-%napiši opet isto, ali za rubni uvjet
 %eventualno možeš pričati o proširenjima za vrijeme
 \section{Postojanje rješenja}
 \label{postojanje}
@@ -524,7 +529,7 @@ Lako se vidi da se naš sustav \ref{linSustav}
 može svesti na problem s linearnim funkcionalima iz
 \ref{laxMil}. Iz toga se lako zaključuje da
 postojanje rješenja možemo garantirati samo za ispravan mesh
-(to garantira implementacija) i za eliptičke PDJ što se lako provjeri programski.
+(to bi trebala garantirati implementacija) i za eliptičke PDJ što se lako provjeri programski.
 
 \newpage
 \section{Implementacijski detalji}
@@ -932,7 +937,6 @@ analizirate njene performanse na konkretnim primjerima.
 
 % Abstract in English
 \begin{abstract}
-	Enter the abstract in English.
 The Galerkin finite element method is frequently
 used in the numerical solution of (partial) differential
 equations and thus plays an important role in modeling

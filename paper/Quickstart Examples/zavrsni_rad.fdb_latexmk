@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex zavrsni_rad"] 1750409958.08472 "zavrsni_rad.aux" "zavrsni_rad.bbl" "zavrsni_rad" 1750409959.22485 0
+["bibtex zavrsni_rad"] 1750539912.2047 "zavrsni_rad.aux" "zavrsni_rad.bbl" "zavrsni_rad" 1750541191.97629 0
   "./fer_IEEEtran_HR.bst" 1623666897 60896 90d69aefaad7b24856119a58e789af2e ""
   "./literatura.bib" 1750409355.28168 196 df7ff63b117d3ae63e9872208663f261 ""
-  "zavrsni_rad.aux" 1750409959.01405 8759 aecf28d8f4226134e90aa896b1673ee0 "pdflatex"
+  "zavrsni_rad.aux" 1750541191.7581 8759 aecf28d8f4226134e90aa896b1673ee0 "pdflatex"
   (generated)
   "zavrsni_rad.bbl"
   "zavrsni_rad.blg"
   (rewritten before read)
-["pdflatex"] 1750409958.14366 "zavrsni_rad.tex" "zavrsni_rad.pdf" "zavrsni_rad" 1750409959.22496 0
+["pdflatex"] 1750541190.80297 "zavrsni_rad.tex" "zavrsni_rad.pdf" "zavrsni_rad" 1750541191.97641 0
   "../fer.cls" 1623666897 27127 b6eafcb69e4cae87147606c61c03c61d ""
   "/etc/texmf/web2c/texmf.cnf" 1749332422.66809 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/opensans/a_jg4h6q.enc" 1561498186 2952 84fda6c8ae8be17712e9d998ffe48bad ""
@@ -185,11 +185,11 @@
   "Figures/sinsinEgz.png" 1750353652.11932 63911 62b815ef864e264f718fc2e868500c2e ""
   "Figures/xy1xy.png" 1750358099.35107 26065 b69e8d85e30af5447dab345d227aea51 ""
   "Files/zadatak.pdf" 1749370985.27665 15710 6479e3eef4440279e15ed3b71264d44c ""
-  "zavrsni_rad.aux" 1750409959.01405 8759 aecf28d8f4226134e90aa896b1673ee0 "pdflatex"
-  "zavrsni_rad.bbl" 1750409958.14003 1202 1f82f942fd125647d59b6839b09c7f94 "bibtex zavrsni_rad"
-  "zavrsni_rad.out" 1750409959.01705 3044 04eb75cdce8583537c4634a25b61c48a "pdflatex"
-  "zavrsni_rad.tex" 1750409955.00096 35708 aba111b56fcfdb691ddc018ee56c9a28 ""
-  "zavrsni_rad.toc" 1750409959.01805 2027 0a37884e9844301a72ebce912d2570ab "pdflatex"
+  "zavrsni_rad.aux" 1750541191.7581 8759 aecf28d8f4226134e90aa896b1673ee0 "pdflatex"
+  "zavrsni_rad.bbl" 1750539912.27343 1202 1f82f942fd125647d59b6839b09c7f94 "bibtex zavrsni_rad"
+  "zavrsni_rad.out" 1750541191.7621 3044 04eb75cdce8583537c4634a25b61c48a "pdflatex"
+  "zavrsni_rad.tex" 1750541190.34108 36033 7c570bdcbf40e1cf743a37395a72f74b ""
+  "zavrsni_rad.toc" 1750541191.7621 2027 0a37884e9844301a72ebce912d2570ab "pdflatex"
   (generated)
   "zavrsni_rad.aux"
   "zavrsni_rad.log"
