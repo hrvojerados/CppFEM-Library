@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.6.7)  21 JUN 2025 23:26
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.6.7)  22 JUN 2025 10:57
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -809,21 +809,21 @@ LaTeX Font Info:    Trying to load font information for TS1+stix2 on input line 
  (/usr/share/texlive/texmf-dist/tex/latex/stix2-type1/ts1stix2.fd
 File: ts1stix2.fd 2018/04/02 v2.0.0-latex stix2 TS1 font definitions
 ) [13{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-ts1.enc}] [14]
-LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 618.
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 623.
  (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 ) [15{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}]
 <Figures/CSR.png, id=266, 293.59688pt x 252.19218pt>
 File: Figures/CSR.png Graphic file (type png)
 <use Figures/CSR.png>
-Package pdftex.def Info: Figures/CSR.png  used on input line 648.
+Package pdftex.def Info: Figures/CSR.png  used on input line 653.
 (pdftex.def)             Requested size: 308.71106pt x 265.17517pt.
  [16 <./Figures/csr.png (PNG copy)>] [17] [18] [19]
 Poglavlje 3..
 <Figures/sinsinEgz.png, id=289, 369.63094pt x 358.33875pt>
 File: Figures/sinsinEgz.png Graphic file (type png)
 <use Figures/sinsinEgz.png>
-Package pdftex.def Info: Figures/sinsinEgz.png  used on input line 781.
+Package pdftex.def Info: Figures/sinsinEgz.png  used on input line 797.
 (pdftex.def)             Requested size: 330.76329pt x 320.65924pt.
 [20
 
@@ -831,10 +831,10 @@ Package pdftex.def Info: Figures/sinsinEgz.png  used on input line 781.
 <Figures/numersinsin001.png, id=298, 800.23969pt x 717.43031pt>
 File: Figures/numersinsin001.png Graphic file (type png)
 <use Figures/numersinsin001.png>
-Package pdftex.def Info: Figures/numersinsin001.png  used on input line 791.
+Package pdftex.def Info: Figures/numersinsin001.png  used on input line 807.
 (pdftex.def)             Requested size: 529.21992pt x 474.47977pt.
 
-Overfull \hbox (88.2022pt too wide) in paragraph at lines 791--792
+Overfull \hbox (88.2022pt too wide) in paragraph at lines 807--808
  [][] 
  []
 
@@ -842,10 +842,10 @@ Overfull \hbox (88.2022pt too wide) in paragraph at lines 791--792
 <Figures/numersinsin00025.png, id=304, 819.8128pt x 716.6775pt>
 File: Figures/numersinsin00025.png Graphic file (type png)
 <use Figures/numersinsin00025.png>
-Package pdftex.def Info: Figures/numersinsin00025.png  used on input line 802.
+Package pdftex.def Info: Figures/numersinsin00025.png  used on input line 818.
 (pdftex.def)             Requested size: 529.21992pt x 462.67447pt.
 
-Overfull \hbox (88.2022pt too wide) in paragraph at lines 802--803
+Overfull \hbox (88.2022pt too wide) in paragraph at lines 818--819
  [][] 
  []
 
@@ -853,36 +853,36 @@ Overfull \hbox (88.2022pt too wide) in paragraph at lines 802--803
 <Figures/numersinsin.png, id=311, 571.38469pt x 498.36188pt>
 File: Figures/numersinsin.png Graphic file (type png)
 <use Figures/numersinsin.png>
-Package pdftex.def Info: Figures/numersinsin.png  used on input line 819.
+Package pdftex.def Info: Figures/numersinsin.png  used on input line 837.
 (pdftex.def)             Requested size: 507.1677pt x 442.35439pt.
 
-Overfull \hbox (66.14996pt too wide) in paragraph at lines 819--820
+Overfull \hbox (66.14996pt too wide) in paragraph at lines 837--838
  [][] 
  []
 
 [23 <./Figures/numersinsin.png (PNG copy)>]
 File: Figures/2Dmesh.png Graphic file (type png)
 <use Figures/2Dmesh.png>
-Package pdftex.def Info: Figures/2Dmesh.png  used on input line 832.
+Package pdftex.def Info: Figures/2Dmesh.png  used on input line 850.
 (pdftex.def)             Requested size: 154.35889pt x 154.35754pt.
 <Figures/hexmesh-modified.png, id=317, 500.87125pt x 500.87125pt>
 File: Figures/hexmesh-modified.png Graphic file (type png)
 <use Figures/hexmesh-modified.png>
-Package pdftex.def Info: Figures/hexmesh-modified.png  used on input line 838.
+Package pdftex.def Info: Figures/hexmesh-modified.png  used on input line 856.
 (pdftex.def)             Requested size: 154.35889pt x 154.359pt.
 <Figures/xy1xy.png, id=319, 389.20406pt x 175.40532pt>
 File: Figures/xy1xy.png Graphic file (type png)
 <use Figures/xy1xy.png>
-Package pdftex.def Info: Figures/xy1xy.png  used on input line 854.
+Package pdftex.def Info: Figures/xy1xy.png  used on input line 872.
 (pdftex.def)             Requested size: 352.81552pt x 159.01152pt.
  [24 <./Figures/hexmesh-modified.png> <./Figures/xy1xy.png (PNG copy)>]
 <Figures/numerxy1xy.png, id=328, 847.66687pt x 718.18312pt>
 File: Figures/numerxy1xy.png Graphic file (type png)
 <use Figures/numerxy1xy.png>
-Package pdftex.def Info: Figures/numerxy1xy.png  used on input line 863.
+Package pdftex.def Info: Figures/numerxy1xy.png  used on input line 881.
 (pdftex.def)             Requested size: 529.21992pt x 448.39212pt.
 
-Overfull \hbox (88.2022pt too wide) in paragraph at lines 863--864
+Overfull \hbox (88.2022pt too wide) in paragraph at lines 881--882
  [][] 
  []
 
@@ -900,7 +900,7 @@ Poglavlje 4..
 pdfTeX warning (ext4): destination with the same identifier (name{chapter.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.963 \chapter{The Code}
+l.981 \chapter{The Code}
                         
 Privitak A.
 [30
@@ -1044,13 +1044,13 @@ Package rerunfilecheck Info: File `zavrsni_rad.out' has not changed.
 Here is how much of TeX's memory you used:
  18410 strings out of 474222
  287423 string characters out of 5748734
- 1932975 words of memory out of 5000000
+ 1933975 words of memory out of 5000000
  40261 multiletter control sequences out of 15000+600000
  737830 words of font info for 192 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  87i,17n,131p,505b,771s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/ascender/opensans/OpenSans-Bold.pfb></usr/share/texlive/texmf-dist/fonts/type1/ascender/opensans/OpenSans-Regular.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/stix2-type1/STIX2Math.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/stix2-type1/STIX2Text-Bold.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/stix2-type1/STIX2Text-BoldItalic.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/stix2-type1/STIX2Text-Italic.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/stix2-type1/STIX2Text-Regular.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on zavrsni_rad.pdf (33 pages, 5179103 bytes).
+Output written on zavrsni_rad.pdf (33 pages, 5180108 bytes).
 PDF statistics:
  441 PDF objects out of 1000 (max. 8388607)
  351 compressed objects within 4 object streams
